@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -11,98 +11,68 @@
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/site.css" />
     <link rel="stylesheet" href="KE03_INTDEV_SE_1_Base.styles.css" />
-    <!-- Inline fallback so file-system preview shows basic dark theme if external CSS doesn't load -->
-
 </head>
 <body>
     <header>
-
         <nav class="custom-navbar">
-
             <div class="nav-left">
-
                 <a class="logo" asp-area="" asp-page="/Index">
                     Matrix inc
                 </a>
-
                 <ul class="custom-nav-links">
-
                     <li>
                         <a asp-page="/Index" class="nav-link active-link">
-                            Home
+                            Thuis
                         </a>
                     </li>
-
                     <li>
-						<a asp-page="/Producten" class="nav-link">
-							Products
+                        <a asp-page="/Producten" class="nav-link">
+                            Producten
                         </a>
                     </li>
                     <li>
                         <a asp-page="/Bestelingen" class="nav-link">
-                            Bestelingen
+                            Bestellingen
                         </a>
                     </li>
-
                 </ul>
-
             </div>
-
             <!-- SEARCH -->
-
             <div class="navbar-search">
-
                 <form class="search-form" method="get">
-
                     <input class="search-input"
                            type="search"
                            placeholder="Zoeken..."
                            name="q" />
-
                 </form>
-
             </div>
-
             <!-- ICONS -->
-
             <div class="navbar-icons">
-
                 <!-- Wishlist -->
-
                 <button class="nav-icon-btn">
-
                     <svg class="icon-svg"
                          xmlns="http://www.w3.org/2000/svg"
                          viewBox="0 0 24 24"
                          fill="none"
                          stroke="currentColor">
-
                         <path stroke-linecap="round"
                               stroke-linejoin="round"
                               stroke-width="1.8"
                               d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z" />
-
                     </svg>
-
                 </button>
-
                 <!-- Cart -->
-
                 <button class="nav-icon-btn">
-
                     <svg class="icon-svg"
                          xmlns="http://www.w3.org/2000/svg"
                          viewBox="0 0 24 24"
                          fill="none"
                          stroke="currentColor">
-
                         <path stroke-linecap="round"
                               stroke-linejoin="round"
                               stroke-width="1.8"
                               d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 6h13" />
-
                     </svg>
-
                 </button>
                 <!-- Profile -->
                 <button class="nav-icon-btn">
@@ -125,17 +95,14 @@
             @RenderBody()
         </main>
     </div>
-
     <footer class="">
         <div class="container">
             &copy; 2025 - KE03_INTDEV_SE_1_Base - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
-
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
