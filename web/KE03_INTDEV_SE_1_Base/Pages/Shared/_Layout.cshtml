@@ -7,25 +7,60 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/KE03_INTDEV_SE_1_Base.styles.css" asp-append-version="true" />
+    <!-- Fallback relative links for quick file-system preview (not required when app is served) -->
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/site.css" />
+    <link rel="stylesheet" href="KE03_INTDEV_SE_1_Base.styles.css" />
+    <!-- Inline fallback so file-system preview shows basic dark theme if external CSS doesn't load -->
+
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">KE03_INTDEV_SE_1_Base</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+        <div class="site-header">
+            <!-- place a header/banner image at ~/images/header.jpg (add your image there) -->
+        </div>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+            <div class="container d-flex align-items-center">
+                <a class="navbar-brand me-3" asp-area="" asp-page="/Index">Matrix inc</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
+
+                <div class="collapse navbar-collapse w-100" id="mainNavbar">
+                    <ul class="navbar-nav">
+                        <li><a href="#" class="nav-item-active">Home</a></li>
+                        <li><a href="#" class="nav-item">Orders</a></li>
+                        <li><a href="#" class="nav-item">Customers</a></li>
+                        <li><a href="#" class="nav-item">Products</a></li>
                     </ul>
+
+                    <!-- centered search bar -->
+                    <div class="navbar-search mx-auto d-none d-md-flex">
+                        <form class="search-form w-100" role="search" method="get" action="/">
+                            <input class="form-control search-input" type="search" placeholder="Zoeken..." aria-label="Search" name="q" />
+                        </form>
+                    </div>
+
+                    <div class="d-flex align-items-center ms-auto navbar-actions">
+                        <button class="btn nav-icon-btn me-2" title="Wenslijst" aria-label="wenslijst">
+                            <svg class="icon-svg" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z" />
+                            </svg>
+                        </button>
+
+                        <button class="btn nav-icon-btn me-2" title="Mandje" aria-label="mandje">
+                            <svg class="icon-svg" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 6h13" />
+                            </svg>
+                        </button>
+
+                        <button class="btn nav-icon-btn" title="Profiel" aria-label="profiel">
+                            <svg class="icon-svg" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM4 20a8 8 0 0 1 16 0" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -36,7 +71,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="">
         <div class="container">
             &copy; 2025 - KE03_INTDEV_SE_1_Base - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>

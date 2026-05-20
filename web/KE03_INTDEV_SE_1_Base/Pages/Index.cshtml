@@ -3,30 +3,6 @@
 @{
     ViewData["Title"] = "Home page";
 }
-
-<div class="matrix-container">
-    <!-- Left Sidebar Navigation -->
-    <aside class="matrix-sidebar">
-        <div class="sidebar-header">
-            <h3>[MENU]</h3>
-        </div>
-        <nav class="sidebar-nav">
-            <ul>
-                <li><a href="#" class="nav-item-active">> Home</a></li>
-                <li><a href="#" class="nav-item">> Orders</a></li>
-                <li><a href="#" class="nav-item">> Customers</a></li>
-                <li><a href="#" class="nav-item">> Products</a></li>
-                <li><a href="#" class="nav-item">> Reports</a></li>
-                <li><a href="#" class="nav-item">> Settings</a></li>
-            </ul>
-        </nav>
-        <div class="sidebar-footer">
-            <p>[SYSTEM ONLINE]</p>
-            <p class="system-status">STATUS: ACTIVE</p>
-        </div>
-    </aside>
-
-    <!-- Main Content Area -->
     <main class="matrix-main">
         <!-- Header Section -->
         <section class="matrix-header">
@@ -38,26 +14,16 @@
 
         <!-- Info Box -->
         <section class="matrix-info-box">
-            <div class="info-header">[SYSTEM INFORMATION]</div>
-            <div class="info-content">
-                <p>
-                    Dit project kun je gebruiken als startpunt voor de individuele inleveropdracht: 
-                    <a href="https://moodle.zuyd.nl/mod/resource/view.php?id=1262065">KE03_INTDEV_SE_1</a>
-                </p>
-                <ul>
-                    <li><strong>> Wat ga je maken:</strong> Een gebruiksvriendelijk online bestelsysteem voor een klant om producten te bestellen.</li>
-                    <li>
-                        <strong>> Hoe ga je dit maken:</strong>
-                        <ul class="nested-list">
-                            <li>- Individuele inleveropdracht</li>
-                            <li>- Pas de principes van HCI toe</li>
-                            <li>- Maak gebruik van: .NET core razor pages</li>
-                            <li>- Maak gebruik van git en github</li>
-                        </ul>
-                    </li>
-                    <li><strong>> Data Access Layer:</strong> Je krijgt een DAL meegeleverd. Ben creatief!</li>
-                </ul>
+            <!-- Acties / Promotions -->
+            <div class="promotions">
+                <div class="promo-header">ACTIES</div>
+                <div class="promo-content">
+                    <p>Bekijk onze actuele aanbiedingen en kortingen.</p>
+                    <a class="btn btn-primary" asp-page="/Products?category=acties">Bezoek acties</a>
+                </div>
             </div>
+
+            <div class="info-header">[SYSTEM INFORMATION]</div>
         </section>
 
         <!-- Customers Table Section -->
