@@ -1,79 +1,196 @@
 @page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Matrix Inc";
 }
-    <main class="matrix-main">
-        <!-- Header Section -->
-        <section class="matrix-header">
-            <div class="header-box">
-                <h1>[ORDER MANAGEMENT SYSTEM]</h1>
-                <p class="header-subtitle">Matrix Interface v1.0</p>
-            </div>
-        </section>
 
-        <!-- Info Box -->
-        <section class="matrix-info-box">
-            <!-- Acties / Promotions -->
-            <div class="promotions">
-                <div class="promo-header">ACTIES</div>
-                <div class="promo-content">
-                    <p>Bekijk onze actuele aanbiedingen en kortingen.</p>
-                    <a class="btn btn-primary" asp-page="/Products?category=acties">Bezoek acties</a>
+<div class="matrix-page">
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+
+            <h1>MATRIX INC</h1>
+
+            <p>
+                One place for all your mechanical parts.
+            </p>
+
+            <a class="hero-btn" asp-page="/Products">
+                SHOP NOW
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- CATEGORY SECTION -->
+    <section class="category-section">
+
+        <div class="section-header">
+            <h2>CATEGORIES</h2>
+        </div>
+
+        <div class="category-grid">
+
+            <div class="category-card">
+
+                <div class="category-image">
+                    <a href="https://aleatori.cat/random" target="_blank">
+
+                        <img src="https://aleatori.cat/random"
+                             alt="Lighting"
+                             class="category-image">
+
+                    </a>
                 </div>
+
+                <div class="category-content">
+                    <h3>Lighting</h3>
+                    <p>Modern smart lighting systems.</p>
+                </div>
+
             </div>
 
-            <div class="info-header">[SYSTEM INFORMATION]</div>
-        </section>
+            <div class="category-card">
 
-        <!-- Customers Table Section -->
-        <section class="matrix-table-section">
-            <div class="table-header">[CUSTOMERS DATABASE]</div>
-            <table class="matrix-table">
-                <thead>
-                    <tr>
-                        <th>&gt; Klant</th>
-                        <th>&gt; Aantal Orders</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var c in Model.Customers)
-                    {        
-                        <tr>
-                            <td>@Html.DisplayName(c.Name)</td>
-                            <td>@Html.DisplayName(c.Orders.Count.ToString())</td>           
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </section>
-    </main>
+                <div class="category-image">
+                    <a href="https://aleatori.cat/random" target="_blank">
 
-    <!-- Right Sidebar Cards -->
-    <aside class="matrix-cards-panel">
-        <div class="cards-header">
-            <h3>[STATS]</h3>
+                        <img src="https://aleatori.cat/random"
+                             alt="Security"
+                             class="category-image">
+
+                    </a>
+                </div>
+
+                <div class="category-content">
+                    <h3>Security</h3>
+                    <p>Protect your home with smart systems.</p>
+                </div>
+
+            </div>
+
+            <div class="category-card">
+
+                <div class="category-image">
+                    <a href="https://aleatori.cat/random" target="_blank">
+
+                        <img src="https://aleatori.cat/random"
+                             alt="Networking"
+                             class="category-image">
+
+                    </a>
+                </div>
+
+                <div class="category-content">
+                    <h3>Networking</h3>
+                    <p>Routers, cables and smart networking.</p>
+                </div>
+
+            </div>
+
+            <div class="category-card">
+
+                <div class="category-image">
+                    <a href="https://aleatori.cat/random" target="_blank">
+
+                        <img src="https://aleatori.cat/random"
+                             alt="Tools"
+                             class="category-image">
+
+                    </a>
+                </div>
+
+                <div class="category-content">
+                    <h3>Tools</h3>
+                    <p>Professional installation equipment.</p>
+                </div>
+
+            </div>
+
         </div>
-        <div class="card-container">
-            <div class="matrix-card">
-                <div class="card-title">[TOTAL ORDERS]</div>
-                <div class="card-value">@Model.Customers.Sum(c => c.Orders.Count)</div>
-            </div>
-            <div class="matrix-card">
-                <div class="card-title">[TOTAL CUSTOMERS]</div>
-                <div class="card-value">@Model.Customers.Count</div>
-            </div>
-            <div class="matrix-card">
-                <div class="card-title">[SYSTEM STATUS]</div>
-                <div class="card-value">ONLINE</div>
-            </div>
-            <div class="matrix-card">
-                <div class="card-title">[LAST UPDATE]</div>
-                <div class="card-value">@DateTime.Now.ToString("HH:mm:ss")</div>
-            </div>
+
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="products-section">
+
+        <div class="section-header">
+            <h2>FEATURED PRODUCTS</h2>
         </div>
-        <div class="cards-footer">
-            <p>[END TRANSMISSION]</p>
+
+        <div class="products-grid">
+
+            @foreach (var c in Model.Customers)
+            {
+                <div class="product-card">
+
+                    <div class="product-image">
+                        <a href="https://aleatori.cat/random" target="_blank">
+
+                            <img src="https://aleatori.cat/random"
+                                 alt="product"
+                                 class="category-image">
+
+                        </a>
+                    </div>
+
+                    <div class="product-content">
+
+                        <h3>@c.Name</h3>
+
+                        <p>
+                            Smart home installation product and
+                            automation equipment.
+                        </p>
+
+                        <div class="product-bottom">
+
+                            <div class="product-price">
+                                @c.Orders.Count Orders
+                            </div>
+
+                            <a class="product-btn" href="#">
+                                VIEW
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
         </div>
-    </aside>
+
+    </section>
+
+    <!-- PROMOTION SECTION -->
+    <section class="promo-section">
+
+        <div class="promo-box">
+
+            <div class="promo-text">
+
+                <h2>LIMITED OFFERS</h2>
+
+                <p>
+                    Discover the newest smart home upgrades
+                    and installation equipment.
+                </p>
+
+            </div>
+
+            <a class="promo-btn" asp-page="/Products">
+                EXPLORE
+            </a>
+
+        </div>
+
+    </section>
+
 </div>
