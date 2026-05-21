@@ -1,41 +1,194 @@
-﻿@page
+@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Matrix Inc";
 }
-<div class="alert-info">
-    <p class="p-1">
-        Dit project kun je gebruiken als startpunt voor de individuele inleveropdracht: <a href="https://moodle.zuyd.nl/mod/resource/view.php?id=1262065">KE03_INTDEV_SE_1</a>
 
-        <ul>
-            <li>Wat ga je maken: Een gebruiksvriendelijk online bestelsysteem voor een klant om producten te bestellen.</li>
-            <li>
-                Hoe ga je dit maken?<br />
-                - Individuele inleveropdracht.<br/>
-                - Pas de principes van HCI toe (bijv. Paper prototyping, design principles etc…)<br />
-                - Maak gebruik van: .NET core razor pages met bijbehorende zaken zoals, html, css, js, bootstrap, jquery<br />
-                - Maak gebruik van git en github voor source control van jouw code<br />
-            </li>
-            <li>
-                Je krijgt een dal (data access layer) meegeleverd. Qua inhoud is die niet perfect gevuld, maar qua structuur biedt die voldoende om een mooi bestel systeem te kunnen maken. <br /> 
-                Maar mis je iets, je bent vrij om alles naar wens aan te passen! Ben creatief!
-            </li>
-        </ul>
-    </p>
+<div class="matrix-page">
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+
+            <h1>MATRIX INC</h1>
+
+            <p>
+                One place for all your mechanical parts.
+            </p>
+
+            <a class="hero-btn" asp-page="/Products">
+                SHOP NU
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- CATEGORY SECTION -->
+    <section class="category-section">
+
+        <div class="section-header">
+            <h2>CATEGORIEËn</h2>
+        </div>
+
+        <div class="category-grid">
+
+            <div class="category-card">
+
+                <div class="category-image">
+                    <a href="https://aleatori.cat/random" target="_blank">
+
+                        <img src="https://aleatori.cat/random"
+                             alt="Licht"
+                             class="category-image">
+
+                    </a>
+                </div>
+
+                <div class="category-content">
+                    <h3>licht</h3>
+                    <p>Moderne lichten.</p>
+                </div>
+
+            </div>
+
+            <div class="category-card">
+
+                <div class="category-image">
+                    <a href="https://aleatori.cat/random" target="_blank">
+
+                        <img src="https://aleatori.cat/random"
+                             alt="Beveiliging"
+                             class="category-image">
+
+                    </a>
+                </div>
+
+                <div class="category-content">
+                    <h3>Beveiliging</h3>
+                    <p>Pmechaniche producten voor jouw bescherming.</p>
+                </div>
+
+            </div>
+
+            <div class="category-card">
+
+                <div class="category-image">
+                    <a href="https://aleatori.cat/random" target="_blank">
+
+                        <img src="https://aleatori.cat/random"
+                             alt="Batterijen"
+                             class="category-image">
+
+                    </a>
+                </div>
+
+                <div class="category-content">
+                    <h3>Batterijen</h3>
+                    <p>Alle soorten batterijen die je nodig kan hebben.</p>
+                </div>
+
+            </div>
+
+            <div class="category-card">
+
+                <div class="category-image">
+                    <a href="https://aleatori.cat/random" target="_blank">
+
+                        <img src="https://aleatori.cat/random"
+                             alt="Auto onderdelen"
+                             class="category-image">
+
+                    </a>
+                </div>
+
+                <div class="category-content">
+                    <h3>Auto onderdelen</h3>
+                    <p>Auto onderdelen voor reparatie.</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="products-section">
+
+        <div class="section-header">
+            <h2> VEEL VERKOGTEN PRODUCTEN</h2>
+        </div>
+
+        <div class="products-grid">
+
+            @foreach (var c in Model.Customers)
+            {
+                <div class="product-card">
+
+                    <div class="product-image">
+                        <a href="https://aleatori.cat/random" target="_blank">
+
+                            <img src="https://aleatori.cat/random"
+                                 alt="product"
+                                 class="category-image">
+
+                        </a>
+                    </div>
+
+                    <div class="product-content">
+
+                        <h3>@c.Name</h3>
+
+                        <p>
+                            Mechanische componenten
+                        </p>
+
+                        <div class="product-bottom">
+
+                            <div class="product-price">
+                                @c.Orders.Count Orders
+                            </div>
+
+                            <a class="product-btn" href="#">
+                                BEKIJEKN
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+    </section>
+
+    <!-- PROMOTION SECTION -->
+    <section class="promo-section">
+
+        <div class="promo-box">
+
+            <div class="promo-text">
+
+                <h2>TIJDELIJKE DEALS</h2>
+
+                <p>
+                    Ontdek de beste deals voor jouw onderdelen.
+                </p>
+
+            </div>
+
+            <a class="promo-btn" asp-page="/Products">
+                ONTDEKKEN
+            </a>
+
+        </div>
+
+    </section>
+
 </div>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Klant</th>
-            <th>Aantal Orders</th>
-        </tr>
-    </thead>
-    @foreach (var c in Model.Customers)
-    {        
-        <tr>
-            <td>@Html.DisplayName(c.Name)</td>
-            <td>@Html.DisplayName(c.Orders.Count.ToString())</td>           
-        </tr>
-    }
-</table>
