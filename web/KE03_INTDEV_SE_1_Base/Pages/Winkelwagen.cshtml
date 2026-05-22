@@ -1,0 +1,42 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Winkelwagen";
+}
+<div>
+	<h3>Winkelwagen</h3>
+</div>
+<div class="container">
+
+    <!-- LINKER KANT -->
+    <div class="cart-area">
+
+        <div class="empty-cart" id="emptyMessage">
+            <div class="cart-icon">🛒</div>
+            <h2>Winkelwagen is leeg</h2>
+        </div>
+
+        <div class="products" id="productsContainer">
+            <!-- Producten komen hier -->
+        </div>
+
+    </div>
+
+    <!-- RECHTER KANT -->
+    <div class="sidebar">
+
+        <div class="summary">
+            <h2>Overzicht</h2>
+
+            <p>Totaal artikelen: <span id="itemCount">0</span></p>
+            <p>Verzendkosten: €4.99</p>
+            <p><strong>Totaal: €<span id="totalPrice">0.00</span></strong></p>
+        </div>
+
+        <button class="checkout">
+            Betalen
+        </button>
+
+    </div>
+
+</div>
