@@ -503,3 +503,11 @@ a {
         align-items: flex-start;
     }
 }
+/*Jesse*/
+h3 {
+    font-size: 30px;
+    color: #00ff66;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    text-shadow: 0 0 20px rgba(0, 255, 100, 0.25);
+}
