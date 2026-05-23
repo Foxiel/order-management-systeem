@@ -1,6 +1,5 @@
 @page
 @model IndexModel
-@using System.Text.Json
 @{
     ViewData["Title"] = "Matrix Inc";
 }
@@ -30,7 +29,7 @@
 
                             <div class="hero-promo-text">
                                 <h2 id="heroTitle">
-                                    TIJDELIJKE DEALS
+                                    TIJDELIJKE ACTIES
                                 </h2>
 
                                 <p id="heroDesc">
@@ -43,7 +42,7 @@
                     </div>
 
                     <div class="hero-bottom">
-                        <a href="#" class="promo-btn">
+                        <a asp-page="/Acties" class="promo-btn">
                             NU BEKIJKEN
                         </a>
                     </div>
@@ -61,99 +60,112 @@
     </section>
 
     <!-- CATEGORY SECTION -->
-    <section class="category-section">
+<section class="category-section">
 
-        <div class="section-header">
-            <h2>CATEGORIEËn</h2>
+    <div class="category-header">
+
+        <h2>Categorieën</h2>
+
+        <a asp-page="/Categorieën" class="show-all-btn">
+            TOON ALLE
+        </a>
+
+    </div>
+
+    <div class="category-wrapper">
+
+        <!-- LINKER PIJL -->
+        <button class="category-side-arrow left-arrow">
+            &#10094;
+        </button>
+
+        <!-- CATEGORY SLIDER -->
+        <div class="category-slider">
+
+            <div class="category-grid" id="categoryGrid">
+
+                <!-- CARD 1 -->
+                <a asp-page="/Categorieën"
+                   asp-route-category="licht"
+                   class="category-card">
+
+                    <div class="category-image">
+                        <img src="https://aleatori.cat/random" alt="Licht">
+                    </div>
+
+                    <div class="category-content">
+                        <h3>Licht</h3>
+                        <p>Moderne lichten.</p>
+                    </div>
+
+                </a>
+
+                <!-- CARD 2 -->
+                <a asp-page="/Categorieën"
+                   asp-route-category="beveiliging"
+                   class="category-card">
+
+                    <div class="category-image">
+                        <img src="https://aleatori.cat/random" alt="Beveiliging">
+                    </div>
+
+                    <div class="category-content">
+                        <h3>Beveiliging</h3>
+                        <p>Mechanische producten voor bescherming.</p>
+                    </div>
+
+                </a>
+
+                <!-- CARD 3 -->
+                <a asp-page="/Categorieën"
+                   asp-route-category="batterijen"
+                   class="category-card">
+
+                    <div class="category-image">
+                        <img src="https://aleatori.cat/random" alt="Batterijen">
+                    </div>
+
+                    <div class="category-content">
+                        <h3>Batterijen</h3>
+                        <p>Alle soorten batterijen.</p>
+                    </div>
+
+                </a>
+
+                <!-- CARD 4 -->
+                <a asp-page="/Categorieën"
+                   asp-route-category="auto-onderdelen"
+                   class="category-card">
+
+                    <div class="category-image">
+                        <img src="https://aleatori.cat/random" alt="Auto onderdelen">
+                    </div>
+
+                    <div class="category-content">
+                        <h3>Auto onderdelen</h3>
+                        <p>Onderdelen voor reparatie.</p>
+                    </div>
+
+                </a>
+
+            </div>
+
         </div>
 
-        <div class="category-grid">
+        <!-- RECHTER PIJL -->
+        <button class="category-side-arrow right-arrow">
+            &#10095;
+        </button>
 
-            <div class="category-card">
+    </div>
 
-                <div class="category-image">
-                    <a href="https://aleatori.cat/random" target="_blank">
-
-                        <img src="https://aleatori.cat/random"
-                             alt="Licht"
-                             class="category-image">
-
-                    </a>
-                </div>
-
-                <div class="category-content">
-                    <h3>licht</h3>
-                    <p>Moderne lichten.</p>
-                </div>
-
-            </div>
-
-            <div class="category-card">
-
-                <div class="category-image">
-                    <a href="https://aleatori.cat/random" target="_blank">
-
-                        <img src="https://aleatori.cat/random"
-                             alt="Beveiliging"
-                             class="category-image">
-
-                    </a>
-                </div>
-
-                <div class="category-content">
-                    <h3>Beveiliging</h3>
-                    <p>Pmechaniche producten voor jouw bescherming.</p>
-                </div>
-
-            </div>
-
-            <div class="category-card">
-
-                <div class="category-image">
-                    <a href="https://aleatori.cat/random" target="_blank">
-
-                        <img src="https://aleatori.cat/random"
-                             alt="Batterijen"
-                             class="category-image">
-
-                    </a>
-                </div>
-
-                <div class="category-content">
-                    <h3>Batterijen</h3>
-                    <p>Alle soorten batterijen die je nodig kan hebben.</p>
-                </div>
-
-            </div>
-
-            <div class="category-card">
-
-                <div class="category-image">
-                    <a href="https://aleatori.cat/random" target="_blank">
-
-                        <img src="https://aleatori.cat/random"
-                             alt="Auto onderdelen"
-                             class="category-image">
-
-                    </a>
-                </div>
-
-                <div class="category-content">
-                    <h3>Auto onderdelen</h3>
-                    <p>Auto onderdelen voor reparatie.</p>
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
+</section>
 
 	<!-- PRODUCTS -->
 	<section class="products-section">
 
 		<div class="section-header">
-			<h2>VEEL VERKOCHTEN PRODUCTEN</h2>
+			<h2>VEEL VERKOCHTE PRODUCTEN</h2>
 		</div>
 
 		<div class="products-grid">
@@ -163,7 +175,7 @@
 				<div class="product-card">
 
 					<div class="product-image">
-						<a href="#">
+						<a asp-page="/Producten">
 							<img src="https://aleatori.cat/random"
 								 alt="@p.Name"
 								 class="category-image">
@@ -236,9 +248,9 @@
                                 @c.Orders.Count orders
                             </div>
 
-                            <a class="product-btn" href="#">
+                            @* <a class="product-btn" href="#">
                                 BEKIJK
-                            </a>
+                            </a> *@
 
                         </div>
 
@@ -253,5 +265,5 @@
 
 </div>
 @section Scripts {
-    <script src="~/js/promo.js"></script>
+    <script src="~/js/Index.js"></script>
 }

@@ -22,3 +22,28 @@ if (document.hidden) {
     document.body.classList.remove('tab-hidden');
     document.title = '✅ Matrix Inc - Actief';
 }
+
+//navbar
+// CATEGORY DROPDOWN
+
+const dropdownBtn =
+    document.getElementById("categoryDropdownBtn");
+
+const dropdown =
+    document.getElementById("categoryDropdown");
+
+dropdownBtn.addEventListener("click", () => {
+
+    dropdown.classList.toggle("active");
+
+});
+
+// sluiten als je ergens anders klikt
+
+document.addEventListener("click", (e) => {
+
+    if (!e.target.closest(".nav-dropdown")) {
+        dropdown.classList.remove("active");
+    }
+
+});

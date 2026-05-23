@@ -13,43 +13,37 @@
     <link rel="stylesheet" href="KE03_INTDEV_SE_1_Base.styles.css" />
 </head>
 <body>
-    <header>
-        <nav class="custom-navbar">
-            <div class="nav-left">
-                <a class="logo" asp-area="" asp-page="/Index">
-                    Matrix inc
-                </a>
-                <ul class="custom-nav-links">
-                    <li>
-                        <a asp-page="/Index" class="nav-link active-link">
-                            Thuis
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-page="/Producten" class="nav-link">
-                            Producten
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-page="/Bestelingen" class="nav-link">
-                            Bestellingen
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <!-- SEARCH -->
-            <div class="navbar-search">
-                <form class="search-form" method="get">
-                    <input class="search-input"
-                           type="search"
-                           placeholder="Zoeken..."
-                           name="q" />
-                </form>
-            </div>
-            <!-- ICONS -->
-            <div class="navbar-icons">
-                <!-- Wishlist -->
-                <button class="nav-icon-btn">
+    <header class="matrix-header">
+
+    <!-- TOP BAR -->
+    <div class="header-top">
+
+        <!-- LOGO -->
+        <a asp-page="/Index" class="matrix-logo">
+            Matrix Inc
+        </a>
+
+        <!-- SEARCH -->
+        <div class="header-search">
+
+            <form class="search-form">
+
+                <input type="text"
+                       class="header-search-input"
+                       placeholder="" />
+
+                <button type="submit" class="search-btn">
+                    ⌕
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- ICONS -->
+        <div class="header-icons">
+            <!-- Wishlist -->
+                <a asp-page="Wishlist" class="nav-icon-btn">
                     <svg class="icon-svg"
                          xmlns="http://www.w3.org/2000/svg"
                          viewBox="0 0 24 24"
@@ -60,9 +54,9 @@
                               stroke-width="1.8"
                               d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z" />
                     </svg>
-                </button>
-                <!-- Cart -->
-                <a asp-page="/Winkelwagen" class="nav-icon-btn">
+            </a>
+             <!-- Wnkelwagen -->
+                    <a asp-page="/Winkelwagen" class="nav-icon-btn">
                     <svg class="icon-svg"
                          xmlns="http://www.w3.org/2000/svg"
                          viewBox="0 0 24 24"
@@ -75,7 +69,7 @@
                     </svg>
                 </a>
                 <!-- Profile -->
-                <button class="nav-icon-btn">
+                <a asp-page="Profiel"   class="nav-icon-btn">
                     <svg class="icon-svg"
                          xmlns="http://www.w3.org/2000/svg"
                          viewBox="0 0 24 24"
@@ -86,10 +80,70 @@
                               stroke-width="1.8"
                               d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM4 20a8 8 0 0 1 16 0" />
                     </svg>
+                </a>
+
+        </div>
+
+    </div>
+
+    <!-- BOTTOM NAV -->
+    <nav class="header-nav">
+
+        <a asp-page="/Index" class="nav-tab active-tab">
+            Thuis
+        </a>
+
+        <a asp-page="/Producten" class="nav-tab">
+            Producten
+        </a>
+
+        <a asp-page="/Bestellingen" class="nav-tab">
+            Bestellingen
+        </a>
+
+        <a asp-page="/Acties" class="nav-tab">
+            Promo's
+        </a>
+
+            <div class="nav-dropdown">
+
+                <button class="nav-tab dropdown-btn" id="categoryDropdownBtn">
+                    Alle categorieën ▼
                 </button>
+
+                <div class="dropdown-menu-custom" id="categoryDropdown">
+
+                    <a asp-page="/Categorieën"
+                       asp-route-category="licht"
+                       class="dropdown-item-custom">
+                        Licht
+                    </a>
+
+                    <a asp-page="/Categorieën"
+                       asp-route-category="beveiliging"
+                       class="dropdown-item-custom">
+                        Beveiliging
+                    </a>
+
+                    <a asp-page="/Categorieën"
+                       asp-route-category="batterijen"
+                       class="dropdown-item-custom">
+                        Batterijen
+                    </a>
+
+                    <a asp-page="/Categorieën"
+                       asp-route-category="auto-onderdelen"
+                       class="dropdown-item-custom">
+                        Auto onderdelen
+                    </a>
+
+                </div>
+
             </div>
-        </nav>
-    </header>
+
+    </nav>
+
+</header>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()

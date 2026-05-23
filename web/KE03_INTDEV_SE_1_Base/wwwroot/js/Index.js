@@ -1,5 +1,6 @@
 ﻿
-    document.addEventListener('DOMContentLoaded', function () {
+// PROMOS
+document.addEventListener('DOMContentLoaded', function () {
 
         const promos = [
     {
@@ -51,4 +52,49 @@
             });
 
     renderPromo();
-    });
+});
+
+// categorieen
+
+const grid = document.getElementById("categoryGrid");
+
+const nextBtn = document.querySelector(".right-arrow");
+const prevBtn = document.querySelector(".left-arrow");
+
+let currentIndex = 0;
+
+const visibleCards = 3;
+const totalCards = grid.children.length;
+
+function updateSlider() {
+
+    const cardWidth =
+        grid.children[0].offsetWidth + 20;
+
+    grid.style.transform =
+        `translateX(-${currentIndex * cardWidth}px)`;
+}
+
+nextBtn.addEventListener("click", () => {
+
+    currentIndex++;
+
+    if (currentIndex > totalCards - visibleCards) {
+        currentIndex = 0;
+    }
+
+    updateSlider();
+
+});
+
+prevBtn.addEventListener("click", () => {
+
+    currentIndex--;
+
+    if (currentIndex < 0) {
+        currentIndex = totalCards - visibleCards;
+    }
+
+    updateSlider();
+
+});
