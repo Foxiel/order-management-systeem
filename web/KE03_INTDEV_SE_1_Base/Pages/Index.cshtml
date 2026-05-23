@@ -170,7 +170,7 @@
 
 		<div class="products-grid">
 
-			@foreach (var p in Model.Products)
+            @foreach (var p in Model.Products.Take(3))
 			{
 				<div class="product-card">
 

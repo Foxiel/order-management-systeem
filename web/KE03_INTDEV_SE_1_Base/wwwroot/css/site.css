@@ -1558,3 +1558,9 @@ h3 {
         background: #00ff66;
         color: black;
     }
+
+f {
+    font-size: 18px;
+    color: #00ff66;
+    letter-spacing: 1px;
+}
