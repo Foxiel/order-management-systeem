@@ -98,6 +98,7 @@ body.tab-hidden .logo {
 /* REMOVE BOOTSTRAP UNDERLINES */
 
 a {
+    color: #00ff66;
     text-decoration: none !important;
 }
 
@@ -280,6 +281,9 @@ a {
 
 .section-header {
     margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
     .section-header h2 {

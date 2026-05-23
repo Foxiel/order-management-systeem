@@ -1,8 +1,44 @@
 @page
-@model IndexModel
+@model KE03_INTDEV_SE_1_Base.Pages.ProductenModel
 @{
-    ViewData["Title"] = "Matrix Inc";
+    ViewData["Title"] = "Producten";
 }
-<div>
-	<h3>Producten</h3>
+
+<div class="container py-4">
+    <h3 class="mb-4">Producten</h3>
+
+    <div class="category-grid">
+        @if (Model.Products.Any())
+        {
+            foreach (var product in Model.Products)
+            {
+                <div class="category-card d-flex flex-column h-100">
+                    <div class="category-image">
+                        <img src="https://via.placeholder.com/600x400?text=Product"
+                             alt="@product.Name"
+                             class="category-image" />
+                    </div>
+
+                    <div class="category-content d-flex flex-column flex-grow-1">
+                        <h3>@product.Name</h3>
+                        <p class="mb-0">@product.Description</p>
+
+                        <div class="product-bottom mt-auto pt-3">
+                            <div class="product-price">
+                                € @product.Price.ToString("F2")
+                            </div>
+
+                            <a class="product-btn" href="#">
+                                Add to cart
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p>Er zijn geen producten gevonden.</p>
+        }
+    </div>
 </div>
