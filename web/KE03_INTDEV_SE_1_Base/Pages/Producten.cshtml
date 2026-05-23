@@ -28,7 +28,9 @@
                                 € @product.Price.ToString("F2")
                             </div>
 
-                            <a class="product-btn" href="#">
+                            <a class="product-btn add-to-cart-btn"
+                               href="#"
+                               data-product-id="@product.Id">
                                 Add to cart
                             </a>
                         </div>
@@ -42,3 +44,5 @@
         }
     </div>
 </div>
+
+<script src="js/producten.js"></script>
