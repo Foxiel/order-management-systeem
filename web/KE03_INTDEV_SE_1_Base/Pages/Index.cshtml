@@ -6,121 +6,216 @@
 
 <div class="matrix-page">
 
-    <!--BIG SECTION -->
+    <!-- HERO / PROMO CAROUSEL -->
     <section class="hero-section">
 
-        <div class="hero-overlay"></div>
+        <div class="hero-card">
 
-        <div class="hero-content">
+            <button class="hero-arrow left" id="prevBtn">
+                &lt;
+            </button>
 
-            <h1>MATRIX INC</h1>
+            <div class="hero-content">
 
-            <p>
-                One place for all your mechanical parts.
-            </p>
+                <div class="hero-overlay">
 
-            <a class="hero-btn" asp-page="/Products">
-                SHOP NU
-            </a>
+                    <div class="hero-top">
+                        acties
+                    </div>
+
+                    <div class="hero-center">
+
+                        <div class="hero-promo-box">
+
+                            <div class="hero-promo-text">
+                                <h2 id="heroTitle">
+                                    TIJDELIJKE ACTIES
+                                </h2>
+
+                                <p id="heroDesc">
+                                    Ontdek de beste deals voor jouw onderdelen.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="hero-bottom">
+                        <a asp-page="/Acties" class="promo-btn">
+                            NU BEKIJKEN
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button class="hero-arrow right" id="nextBtn">
+                &gt;
+            </button>
 
         </div>
 
     </section>
 
     <!-- CATEGORY SECTION -->
-    <section class="category-section">
-        <div class="section-header">
-            <h2>CATEGORIEËN</h2>
-            <a class="show-all" asp-page="/Categorieën">Toon alles</a>
-        </div>
+<section class="category-section">
 
-        <div class="category-grid">
+    <div class="category-header">
 
-            <div class="category-card">
+        <h2>Categorieën</h2>
 
-                <a asp-page="/Producten">
+        <a asp-page="/Categorieën" class="show-all-btn">
+            TOON ALLE
+        </a>
+
+    </div>
+
+    <div class="category-wrapper">
+
+        <!-- LINKER PIJL -->
+        <button class="category-side-arrow left-arrow">
+            &#10094;
+        </button>
+
+        <!-- CATEGORY SLIDER -->
+        <div class="category-slider">
+
+            <div class="category-grid" id="categoryGrid">
+
+                <!-- CARD 1 -->
+                <a asp-page="/Categorieën"
+                   asp-route-category="licht"
+                   class="category-card">
+
                     <div class="category-image">
-                        <img src="https://aleatori.cat/random"
-                             alt="Licht"
-                             class="category-image">
-
+                        <img src="https://aleatori.cat/random" alt="Licht">
                     </div>
 
                     <div class="category-content">
-                        <h3>licht</h3>
+                        <h3>Licht</h3>
                         <p>Moderne lichten.</p>
                     </div>
+
                 </a>
 
-            </div>
+                <!-- CARD 2 -->
+                <a asp-page="/Categorieën"
+                   asp-route-category="beveiliging"
+                   class="category-card">
 
-            <div class="category-card">
-
-                <a asp-page="/Producten">
                     <div class="category-image">
-
-                        <img src="https://aleatori.cat/random"
-                             alt="Beveiliging"
-                             class="category-image">
-
-
+                        <img src="https://aleatori.cat/random" alt="Beveiliging">
                     </div>
 
                     <div class="category-content">
                         <h3>Beveiliging</h3>
-                        <p>Pmechaniche producten voor jouw bescherming.</p>
+                        <p>Mechanische producten voor bescherming.</p>
                     </div>
 
                 </a>
-            </div>
 
-            <div class="category-card">
+                <!-- CARD 3 -->
+                <a asp-page="/Categorieën"
+                   asp-route-category="batterijen"
+                   class="category-card">
 
-                <a asp-page="/Producten">
                     <div class="category-image">
-
-                        <img src="https://aleatori.cat/random"
-                             alt="Batterijen"
-                             class="category-image">
-
+                        <img src="https://aleatori.cat/random" alt="Batterijen">
                     </div>
 
                     <div class="category-content">
                         <h3>Batterijen</h3>
-                        <p>Alle soorten batterijen die je nodig kan hebben.</p>
+                        <p>Alle soorten batterijen.</p>
                     </div>
+
                 </a>
 
-            </div>
+                <!-- CARD 4 -->
+                <a asp-page="/Categorieën"
+                   asp-route-category="auto-onderdelen"
+                   class="category-card">
 
-            <div class="category-card">
-
-                <a asp-page="/Producten">
                     <div class="category-image">
-
-                        <img src="https://aleatori.cat/random"
-                             alt="Auto onderdelen"
-                             class="category-image">
-
+                        <img src="https://aleatori.cat/random" alt="Auto onderdelen">
                     </div>
 
                     <div class="category-content">
                         <h3>Auto onderdelen</h3>
-                        <p>Auto onderdelen voor reparatie.</p>
+                        <p>Onderdelen voor reparatie.</p>
                     </div>
 
                 </a>
+
             </div>
 
         </div>
 
-    </section>
+        <!-- RECHTER PIJL -->
+        <button class="category-side-arrow right-arrow">
+            &#10095;
+        </button>
 
-    <!-- PRODUCTS -->
-    <section class="products-section">
+    </div>
+
+</section>
+
+	<!-- PRODUCTS -->
+	<section class="products-section">
+
+		<div class="section-header">
+			<h2>VEEL VERKOCHTE PRODUCTEN</h2>
+		</div>
+
+		<div class="products-grid">
+
+            @foreach (var p in Model.Products.Take(3))
+			{
+				<div class="product-card">
+
+					<div class="product-image">
+						<a asp-page="/Producten">
+							<img src="https://aleatori.cat/random"
+								 alt="@p.Name"
+								 class="category-image">
+						</a>
+					</div>
+
+					<div class="product-content">
+
+						<h3>@p.Name</h3>
+
+						<p>
+							@p.Description
+						</p>
+
+						<div class="product-bottom">
+
+							<div class="product-price">
+								@p.Price.ToString("C")
+							</div>
+
+							<a class="product-btn" asp-page="/Producten" asp-route-id="@p.Id">
+								BEKIJK
+							</a>
+
+						</div>
+
+					</div>
+
+				</div>
+			}
+
+		</div>
+
+	</section>
+
+    <!-- CUSTOMERS -->
+    <section class="customers-section">
 
         <div class="section-header">
-            <h2> VEEL VERKOCHTE PRODUCTEN</h2>
+            <h2>KLIËNTEN</h2>
         </div>
 
         <div class="products-grid">
@@ -130,10 +225,10 @@
                 <div class="product-card">
 
                     <div class="product-image">
-                        <a href="https://aleatori.cat/random" target="_blank">
+                        <a href="#">
 
                             <img src="https://aleatori.cat/random"
-                                 alt="product"
+                                 alt="customer"
                                  class="category-image">
 
                         </a>
@@ -144,18 +239,18 @@
                         <h3>@c.Name</h3>
 
                         <p>
-                            Mechanische componenten
+                            @c.Address
                         </p>
 
                         <div class="product-bottom">
 
                             <div class="product-price">
-                                @c.Orders.Count Orders
+                                @c.Orders.Count orders
                             </div>
 
-                            <a class="product-btn" href="#">
-                                BEKIJEKN
-                            </a>
+                            @* <a class="product-btn" href="#">
+                                BEKIJK
+                            </a> *@
 
                         </div>
 
@@ -168,27 +263,7 @@
 
     </section>
 
-    <!-- PROMOTION SECTION -->
-    <section class="promo-section">
-
-        <div class="promo-box">
-
-            <div class="promo-text">
-
-                <h2>TIJDELIJKE DEALS</h2>
-
-                <p>
-                    Ontdek de beste deals voor jouw onderdelen.
-                </p>
-
-            </div>
-
-            <a class="promo-btn" asp-page="/Products">
-                ONTDEKKEN
-            </a>
-
-        </div>
-
-    </section>
-
 </div>
+@section Scripts {
+    <script src="~/js/Index.js"></script>
+}
