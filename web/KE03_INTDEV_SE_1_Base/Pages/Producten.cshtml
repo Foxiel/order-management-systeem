@@ -44,11 +44,8 @@
                                     € @product.ProductPrice.ToString("F2")
                                 </div>
                                 <button type="button"
-                                        class="product-btn add-to-cart-btn"
-                                        data-product-id="@product.ProductEAN"
-                                        data-product-name="@product.ProductName"
-                                        data-product-price="@product.ProductPrice.ToString(System.Globalization.CultureInfo.InvariantCulture)"
-                                        data-product-image="@imageUrl">
+                                        class="product-modal-add-btn"
+                                        onclick="addToCart(this, '@product.ProductEAN', '@product.ProductName', @product.ProductPrice.ToString(System.Globalization.CultureInfo.InvariantCulture), '@imageUrl')">
                                     Aan wagen toevoegen
                                 </button>
 

@@ -6,7 +6,49 @@ let cartItems = [];
 document.addEventListener("DOMContentLoaded", function () {
     loadCartFromStorage();
     updateCartDisplay();
+    bindHeaderCart();
 });
+
+// Expose addToCart globally. Supports two call signatures:
+// addToCart(buttonElement, id, name, price, image) and
+// addToCart(id, name, price, image?)
+window.addToCart = function (a, b, c, d, e) {
+    let button = null;
+    let id, name, price, image;
+
+    if (a && typeof a === 'object' && a.tagName) {
+        button = a;
+        id = b;
+        name = c;
+        price = d;
+        image = e || '';
+    } else {
+        id = a;
+        name = b;
+        price = c;
+        image = d || '';
+    }
+
+    price = Number(price);
+    if (isNaN(price)) price = 0;
+
+    const existingItem = cartItems.find(item => item.id === id);
+
+    if (existingItem) {
+        existingItem.amount += 1;
+    } else {
+        cartItems.push({ id: id, name: name, price: price, image: image, amount: 1 });
+    }
+
+    saveCartToStorage();
+    updateCartDisplay();
+
+    if (button) {
+        const originalText = button.textContent;
+        button.textContent = "Toegevoegd ✓";
+        setTimeout(() => button.textContent = originalText, 1500);
+    }
+};
 
 function loadCartFromStorage() {
     const savedCart = localStorage.getItem(STORAGE_KEY);
@@ -127,4 +169,6 @@ function updateCartDisplay() {
     subtotalPrice.textContent = `€${subtotal.toFixed(2)}`;
     shippingPrice.textContent = `€${shipping.toFixed(2)}`;
     totalPrice.textContent = `€${total.toFixed(2)}`;
+
+    renderCartPreview();
 }

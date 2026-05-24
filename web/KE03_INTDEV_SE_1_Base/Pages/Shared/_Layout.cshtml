@@ -50,7 +50,7 @@
 					</svg>
 				</a>
 
-				<a asp-page="/Winkelwagen" class="nav-icon-btn">
+		<a asp-page="/Winkelwagen" id="cartIconBtn" class="nav-icon-btn">
 					<svg class="icon-svg"
 						 xmlns="http://www.w3.org/2000/svg"
 						 viewBox="0 0 24 24"
@@ -191,6 +191,7 @@
 	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="~/js/site.js" asp-append-version="true"></script>
 	<script src="~/js/login.js" asp-append-version="true"></script>
+	<script src="~/js/winkelwagen.js" asp-append-version="true"></script>
 
 	@await RenderSectionAsync("Scripts", required: false)
 </body>
