@@ -1,109 +1,131 @@
 @page
 @model KE03_INTDEV_SE_1_Base.Pages.WinkelwagenModel
 @{
-	ViewData["Title"] = "Winkelwagen";
+    ViewData["Title"] = "Winkelwagen";
 }
 
 <div class="matrix-page">
-	<section class="cart-section">
-		<div class="section-header">
-			<div class="header-with-button">
-				<h2>WINKELWAGEN</h2>
-				<button class="cart-add-product-btn" data-bs-toggle="modal" data-bs-target="#addProductModal">
-					+ PRODUCT TOEVOEGEN
-				</button>
-			</div>
-		</div>
+    <section class="cart-section">
+        <div class="section-header">
+            <div class="header-with-button">
+                <h2>WINKELWAGEN</h2>
 
-		<div class="cart-container">
-			<!-- LINKER KANT - CART ITEMS -->
-			<div class="cart-area">
-				<div class="empty-cart" id="emptyMessage">
-					<div class="cart-icon">🛒</div>
-					<h2>Winkelwagen is leeg</h2>
-					<p>Voeg producten toe om te beginnen</p>
-				</div>
+                @*
+                Deze knop is tijdelijk uitgezet.
+                Voor een demo kun je hem weer aanzetten door deze comment weg te halen.
 
-				<div class="cart-items" id="cartItemsContainer">
-					<!-- Winkelwagen items worden hier ingevoegd -->
-				</div>
-			</div>
+                <button class="cart-add-product-btn" data-bs-toggle="modal" data-bs-target="#addProductModal">
+                    + PRODUCT TOEVOEGEN
+                </button>
+                *@
+            </div>
+        </div>
 
-			<!-- RECHTER KANT - SUMMARY -->
-			<div class="cart-sidebar">
-				<div class="cart-summary">
-					<h2>Overzicht</h2>
+        <div class="cart-container">
+            <div class="cart-area">
+                <div class="empty-cart" id="emptyMessage">
+                    <div class="cart-icon">🛒</div>
+                    <h2>Winkelwagen is leeg</h2>
+                    <p>Voeg producten toe om te beginnen</p>
+                </div>
 
-					<div class="summary-row">
-						<span>Totaal artikelen:</span>
-						<span id="itemCount">0</span>
-					</div>
+                <div class="cart-items" id="cartItemsContainer">
+                    <!-- Winkelwagen items worden hier ingevoegd -->
+                </div>
+            </div>
 
-					<div class="summary-row">
-						<span>Subtotaal:</span>
-						<span id="subtotalPrice">€0.00</span>
-					</div>
+            <div class="cart-sidebar">
+                <div class="cart-summary">
+                    <h2>Overzicht</h2>
 
-					<div class="summary-row">
-						<span>Verzendkosten:</span>
-						<span id="shippingPrice">€4.99</span>
-					</div>
+                    <div class="summary-row">
+                        <span>Totaal artikelen:</span>
+                        <span id="itemCount">0</span>
+                    </div>
 
-					<div class="summary-divider"></div>
+                    <div class="summary-row">
+                        <span>Subtotaal:</span>
+                        <span id="subtotalPrice">€0.00</span>
+                    </div>
 
-					<div class="summary-row total">
-						<span>Totaal:</span>
-						<span id="totalPrice">€4.99</span>
-					</div>
-				</div>
+                    <div class="summary-row">
+                        <span>Verzendkosten:</span>
+                        <span id="shippingPrice">€4.99</span>
+                    </div>
 
-				<button class="cart-checkout-btn">
-					BETALEN
-				</button>
-			</div>
-		</div>
-	</section>
+                    <div class="summary-divider"></div>
+
+                    <div class="summary-row total">
+                        <span>Totaal:</span>
+                        <span id="totalPrice">€4.99</span>
+                    </div>
+                </div>
+
+                <button class="cart-checkout-btn">
+                    BETALEN
+                </button>
+            </div>
+        </div>
+    </section>
 </div>
 
-<!-- MODAL - PRODUCT SELECTION -->
+@*
+MODAL - PRODUCT SELECTION
+
+Deze modal is tijdelijk uitgezet.
+Voor een demo kun je hem weer aanzetten door deze Razor comment weg te halen.
+De producten komen nu uit ProductDAL via Model.Products.
+
 <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content cart-modal">
-			<div class="modal-header cart-modal-header">
-				<h5 class="modal-title" id="addProductModalLabel">Product Toevoegen</h5>
-				<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body cart-modal-body">
-				<div class="products-modal-grid">
-					@foreach (var product in Model.Products)
-					{
-						<div class="product-modal-card">
-							<div class="product-modal-image">
-								<img src="https://aleatori.cat/random" alt="@product.Name" class="category-image">
-							</div>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content cart-modal">
+            <div class="modal-header cart-modal-header">
+                <h5 class="modal-title" id="addProductModalLabel">Product Toevoegen</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
 
-							<div class="product-modal-content">
-								<h3>@product.Name</h3>
-								<p class="product-description">@product.Description</p>
+            <div class="modal-body cart-modal-body">
+                <div class="products-modal-grid">
 
-								<div class="product-modal-footer">
-									<div class="product-modal-price">
-										€@product.Price.ToString("F2")
-									</div>
+                    @foreach (var product in Model.Products)
+                    {
+                        var imageUrl = !string.IsNullOrWhiteSpace(product.ImageUrl)
+                            ? product.ImageUrl
+                            : $"https://cataas.com/cat?width=400&height=300&random={product.ProductEAN}";
 
-									<button class="product-modal-add-btn" onclick="addToCart(@product.Id, '@product.Name', @product.Price)">
-										TOEVOEGEN
-									</button>
-								</div>
-							</div>
-						</div>
-					}
-				</div>
-			</div>
-		</div>
-	</div>
+                        <div class="product-modal-card">
+                            <div class="product-modal-image">
+                                <img src="@imageUrl" alt="@product.ProductName" class="category-image">
+                            </div>
+
+                            <div class="product-modal-content">
+                                <h3>@product.ProductName</h3>
+
+                                <p class="product-description">
+                                    @product.ProductDescription
+                                </p>
+
+                                <div class="product-modal-footer">
+                                    <div class="product-modal-price">
+                                        €@product.ProductPrice.ToString("F2")
+                                    </div>
+
+                                    <button class="product-modal-add-btn"
+                                            onclick="addToCart('@product.ProductEAN', '@product.ProductName', @product.ProductPrice.ToString(System.Globalization.CultureInfo.InvariantCulture))">
+                                        TOEVOEGEN
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+*@
 
 @section Scripts {
-	<script src="~/js/winkelwagen.js"></script>
+    <script src="~/js/winkelwagen.js"></script>
 }

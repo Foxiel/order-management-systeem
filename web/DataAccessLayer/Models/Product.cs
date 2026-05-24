@@ -1,4 +1,6 @@
-﻿namespace DataAccessLayer.Models;
+﻿//Gemaakt door Tristan
+
+namespace DataAccessLayer.Models;
 
 public class Product
 {
@@ -13,4 +15,5 @@ public class Product
     public DateTime ProductReleaseDate { get; set; }
     public string ManufacturerId { get; set; } = string.Empty;
     public string SubcategoryId { get; set; } = string.Empty;
+    public string? ImageUrl { get; set; }
 }

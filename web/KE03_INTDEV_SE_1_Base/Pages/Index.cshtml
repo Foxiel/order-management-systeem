@@ -5,10 +5,9 @@
 }
 
 <div class="matrix-page">
-
-    <!-- HERO / PROMO CAROUSEL -->
+    <!-- Gemaakt door Jesse -->
+    <!-- Aangepast door Tristan. Aanpassing hardcoded producten klanten er uitgehaalt -->
     <section class="hero-section">
-
         <div class="hero-card">
 
             <button class="hero-arrow left" id="prevBtn">
@@ -16,7 +15,6 @@
             </button>
 
             <div class="hero-content">
-
                 <div class="hero-overlay">
 
                     <div class="hero-top">
@@ -24,9 +22,7 @@
                     </div>
 
                     <div class="hero-center">
-
                         <div class="hero-promo-box">
-
                             <div class="hero-promo-text">
                                 <h2 id="heroTitle">
                                     TIJDELIJKE ACTIES
@@ -36,9 +32,7 @@
                                     Ontdek de beste deals voor jouw onderdelen.
                                 </p>
                             </div>
-
                         </div>
-
                     </div>
 
                     <div class="hero-bottom">
@@ -48,7 +42,6 @@
                     </div>
 
                 </div>
-
             </div>
 
             <button class="hero-arrow right" id="nextBtn">
@@ -56,201 +49,125 @@
             </button>
 
         </div>
-
     </section>
 
-    <!-- CATEGORY SECTION -->
-<section class="category-section">
+    <section class="category-section">
 
-    <div class="category-header">
+        <div class="category-header">
+            <h2>Categorieën</h2>
 
-        <h2>Categorieën</h2>
+            <a asp-page="/Categorieën" class="show-all-btn">
+                TOON ALLE
+            </a>
+        </div>
 
-        <a asp-page="/Categorieën" class="show-all-btn">
-            TOON ALLE
-        </a>
+        <div class="category-wrapper">
 
-    </div>
+            <button class="category-side-arrow left-arrow">
+                &#10094;
+            </button>
 
-    <div class="category-wrapper">
+            <div class="category-slider">
 
-        <!-- LINKER PIJL -->
-        <button class="category-side-arrow left-arrow">
-            &#10094;
-        </button>
+                <div class="category-grid" id="categoryGrid">
 
-        <!-- CATEGORY SLIDER -->
-        <div class="category-slider">
+                    <a asp-page="/Categorieën" asp-route-category="licht" class="category-card">
+                        <div class="category-image">
+                            <img src="https://aleatori.cat/random" alt="Licht">
+                        </div>
 
-            <div class="category-grid" id="categoryGrid">
+                        <div class="category-content">
+                            <h3>Licht</h3>
+                            <p>Moderne lichten.</p>
+                        </div>
+                    </a>
 
-                <!-- CARD 1 -->
-                <a asp-page="/Categorieën"
-                   asp-route-category="licht"
-                   class="category-card">
+                    <a asp-page="/Categorieën" asp-route-category="beveiliging" class="category-card">
+                        <div class="category-image">
+                            <img src="https://aleatori.cat/random" alt="Beveiliging">
+                        </div>
 
-                    <div class="category-image">
-                        <img src="https://aleatori.cat/random" alt="Licht">
-                    </div>
+                        <div class="category-content">
+                            <h3>Beveiliging</h3>
+                            <p>Mechanische producten voor bescherming.</p>
+                        </div>
+                    </a>
 
-                    <div class="category-content">
-                        <h3>Licht</h3>
-                        <p>Moderne lichten.</p>
-                    </div>
+                    <a asp-page="/Categorieën" asp-route-category="batterijen" class="category-card">
+                        <div class="category-image">
+                            <img src="https://aleatori.cat/random" alt="Batterijen">
+                        </div>
 
-                </a>
+                        <div class="category-content">
+                            <h3>Batterijen</h3>
+                            <p>Alle soorten batterijen.</p>
+                        </div>
+                    </a>
 
-                <!-- CARD 2 -->
-                <a asp-page="/Categorieën"
-                   asp-route-category="beveiliging"
-                   class="category-card">
+                    <a asp-page="/Categorieën" asp-route-category="auto-onderdelen" class="category-card">
+                        <div class="category-image">
+                            <img src="https://aleatori.cat/random" alt="Auto onderdelen">
+                        </div>
 
-                    <div class="category-image">
-                        <img src="https://aleatori.cat/random" alt="Beveiliging">
-                    </div>
+                        <div class="category-content">
+                            <h3>Auto onderdelen</h3>
+                            <p>Onderdelen voor reparatie.</p>
+                        </div>
+                    </a>
 
-                    <div class="category-content">
-                        <h3>Beveiliging</h3>
-                        <p>Mechanische producten voor bescherming.</p>
-                    </div>
-
-                </a>
-
-                <!-- CARD 3 -->
-                <a asp-page="/Categorieën"
-                   asp-route-category="batterijen"
-                   class="category-card">
-
-                    <div class="category-image">
-                        <img src="https://aleatori.cat/random" alt="Batterijen">
-                    </div>
-
-                    <div class="category-content">
-                        <h3>Batterijen</h3>
-                        <p>Alle soorten batterijen.</p>
-                    </div>
-
-                </a>
-
-                <!-- CARD 4 -->
-                <a asp-page="/Categorieën"
-                   asp-route-category="auto-onderdelen"
-                   class="category-card">
-
-                    <div class="category-image">
-                        <img src="https://aleatori.cat/random" alt="Auto onderdelen">
-                    </div>
-
-                    <div class="category-content">
-                        <h3>Auto onderdelen</h3>
-                        <p>Onderdelen voor reparatie.</p>
-                    </div>
-
-                </a>
+                </div>
 
             </div>
 
+            <button class="category-side-arrow right-arrow">
+                &#10095;
+            </button>
+
         </div>
 
-        <!-- RECHTER PIJL -->
-        <button class="category-side-arrow right-arrow">
-            &#10095;
-        </button>
+    </section>
 
-    </div>
-
-</section>
-
-	<!-- PRODUCTS -->
-	<section class="products-section">
-
-		<div class="section-header">
-			<h2>VEEL VERKOCHTE PRODUCTEN</h2>
-		</div>
-
-		<div class="products-grid">
-
-            @foreach (var p in Model.Products.Take(3))
-			{
-				<div class="product-card">
-
-					<div class="product-image">
-						<a asp-page="/Producten">
-							<img src="https://aleatori.cat/random"
-								 alt="@p.Name"
-								 class="category-image">
-						</a>
-					</div>
-
-					<div class="product-content">
-
-						<h3>@p.Name</h3>
-
-						<p>
-							@p.Description
-						</p>
-
-						<div class="product-bottom">
-
-							<div class="product-price">
-								@p.Price.ToString("C")
-							</div>
-
-							<a class="product-btn" asp-page="/Producten" asp-route-id="@p.Id">
-								BEKIJK
-							</a>
-
-						</div>
-
-					</div>
-
-				</div>
-			}
-
-		</div>
-
-	</section>
-
-    <!-- CUSTOMERS -->
-    <section class="customers-section">
+    <section class="products-section">
 
         <div class="section-header">
-            <h2>KLIËNTEN</h2>
+            <h2>VEEL VERKOCHTE PRODUCTEN</h2>
         </div>
 
         <div class="products-grid">
 
-            @foreach (var c in Model.Customers)
+            @foreach (var product in Model.Products.Take(3))
             {
+                var imageUrl = string.IsNullOrWhiteSpace(product.ImageUrl)
+                ? "https://aleatori.cat/random"
+                : product.ImageUrl;
+
                 <div class="product-card">
 
                     <div class="product-image">
-                        <a href="#">
-
-                            <img src="https://aleatori.cat/random"
-                                 alt="customer"
+                        <a asp-page="/Producten" asp-route-id="@product.ProductEAN">
+                            <img src="@imageUrl"
+                                 alt="@product.ProductName"
                                  class="category-image">
-
                         </a>
                     </div>
 
                     <div class="product-content">
 
-                        <h3>@c.Name</h3>
+                        <h3>@product.ProductName</h3>
 
                         <p>
-                            @c.Address
+                            @product.ProductDescription
                         </p>
 
                         <div class="product-bottom">
 
                             <div class="product-price">
-                                @c.Orders.Count orders
+                                @product.ProductPrice.ToString("C")
                             </div>
 
-                            @* <a class="product-btn" href="#">
+                            <a class="product-btn" asp-page="/Producten" asp-route-id="@product.ProductEAN">
                                 BEKIJK
-                            </a> *@
+                            </a>
 
                         </div>
 
@@ -263,7 +180,49 @@
 
     </section>
 
+    <section class="customers-section">
+
+        <div class="section-header">
+            <h2>KLANTEN</h2>
+        </div>
+
+        <div class="products-grid">
+
+            @foreach (var customer in Model.Customers)
+            {
+                <div class="product-card">
+
+                    <div class="product-image">
+                        <img src="https://aleatori.cat/random"
+                             alt="@customer.CustomerName"
+                             class="category-image">
+                    </div>
+
+                    <div class="product-content">
+
+                        <h3>@customer.CustomerName</h3>
+
+                        <p>
+                            @customer.CustomerEmail
+                        </p>
+
+                        <div class="product-bottom">
+                            <div class="product-price">
+                                Klant
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+    </section>
+
 </div>
+
 @section Scripts {
     <script src="~/js/Index.js"></script>
 }

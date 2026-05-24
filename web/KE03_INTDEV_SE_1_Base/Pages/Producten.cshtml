@@ -4,45 +4,72 @@
     ViewData["Title"] = "Producten";
 }
 
-<div class="container py-4">
-    <h3 class="mb-4">Producten</h3>
+<div class="matrix-page">
+    <!-- Gemaakt door  -->
+    <!-- Aangepast door Tristan. Aanpassing Hardcoded producten er uitgehaalt -->
+    <section class="products-section">
 
-    <div class="category-grid">
-        @if (Model.Products.Any())
-        {
-            foreach (var product in Model.Products)
+        <div class="section-header">
+            <h2>PRODUCTEN</h2>
+        </div>
+
+        <div class="products-grid">
+
+            @if (Model.Products.Any())
             {
-                <div class="category-card d-flex flex-column h-100">
-                    <div class="category-image">
-                        <img src="https://aleatori.cat/random"
-                             alt="@product.Name"
-                             class="category-image" />
-                    </div>
+                foreach (var product in Model.Products)
+                {
+                    var imageUrl = !string.IsNullOrWhiteSpace(product.ImageUrl)
+                    ? product.ImageUrl
+                    : $"https://cataas.com/cat?width=400&height=300&random={product.ProductEAN}";
 
-                    <div class="category-content d-flex flex-column flex-grow-1">
-                        <h3>@product.Name</h3>
-                        <p class="mb-0">@product.Description</p>
+                    <div class="product-card">
 
-                        <div class="product-bottom mt-auto pt-3">
-                            <div class="product-price">
-                                € @product.Price.ToString("F2")
+                        <div class="product-image">
+                            <img src="@imageUrl"
+                                 alt="@product.ProductName" />
+                        </div>
+
+                        <div class="product-content">
+
+                            <h3>@product.ProductName</h3>
+
+                            <p>
+                                @product.ProductDescription
+                            </p>
+
+                            <div class="product-bottom">
+
+                                <div class="product-price">
+                                    € @product.ProductPrice.ToString("F2")
+                                </div>
+                                <button type="button"
+                                        class="product-btn add-to-cart-btn"
+                                        data-product-id="@product.ProductEAN"
+                                        data-product-name="@product.ProductName"
+                                        data-product-price="@product.ProductPrice.ToString(System.Globalization.CultureInfo.InvariantCulture)"
+                                        data-product-image="@imageUrl">
+                                    Aan wagen toevoegen
+                                </button>
+
                             </div>
 
-                            <a class="product-btn add-to-cart-btn"
-                               href="#"
-                               data-product-id="@product.Id">
-                                Add to cart
-                            </a>
                         </div>
+
                     </div>
-                </div>
+                }
             }
-        }
-        else
-        {
-            <p>Er zijn geen producten gevonden.</p>
-        }
-    </div>
+            else
+            {
+                <p>Er zijn geen producten gevonden.</p>
+            }
+
+        </div>
+
+    </section>
+
 </div>
 
-<script src="js/producten.js"></script>
+@section Scripts {
+    <script src="~/js/producten.js"></script>
+}

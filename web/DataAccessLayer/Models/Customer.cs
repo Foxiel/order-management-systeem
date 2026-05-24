@@ -1,4 +1,6 @@
-﻿namespace DataAccessLayer.Models;
+﻿//Gemaakt door Tristan
+
+namespace DataAccessLayer.Models;
 
 public class Customer
 {
