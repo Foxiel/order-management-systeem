@@ -1,8 +1,82 @@
 @page
-@model IndexModel
+@model KE03_INTDEV_SE_1_Base.Pages.ProfielModel
 @{
-	ViewData["Title"] = "Profiel";
+    ViewData["Title"] = "Profiel";
 }
-<div>
-	<h3>Profiel</h3>
+
+<div class="matrix-page">
+    <section class="products-section">
+
+        <div class="section-header">
+            <h2>MIJN MATRIX</h2>
+        </div>
+
+        <div id="notLoggedIn" class="product-card" style="padding: 30px;">
+            <h3>Je bent niet ingelogd</h3>
+            <p>Log eerst in om je profielgegevens te bekijken.</p>
+        </div>
+
+        <div id="profileContainer" class="product-card" style="display:none; padding: 35px; max-width: 900px;">
+
+            <h3>Persoonsgegevens</h3>
+
+            <input type="hidden" id="customerId">
+            <input type="hidden" id="addressId">
+
+            <label>Naam</label>
+            <input class="profile-input" id="customerName" disabled>
+
+            <label>E-mail</label>
+            <input class="profile-input" id="customerEmail" disabled>
+
+            <label>Telefoon</label>
+            <input class="profile-input" id="customerPhone" disabled>
+
+            <br />
+            <br />
+
+            <h3>Adresgegevens</h3>
+
+            <label>Straat</label>
+            <input class="profile-input" id="street" disabled>
+
+            <label>Huisnummer</label>
+            <input class="profile-input" id="houseNumber" disabled>
+
+            <label>Postcode</label>
+            <input class="profile-input" id="postalCode" disabled>
+
+            <label>Woonplaats</label>
+            <input class="profile-input" id="city" disabled>
+
+            <label>Land</label>
+            <input class="profile-input" id="country" disabled>
+
+            <label>Adres type</label>
+            <input class="profile-input" id="addressType" disabled>
+
+            <br />
+            <br />
+
+            <button id="editProfileBtn" class="product-btn" type="button">
+                Gegevens aanpassen
+            </button>
+
+            <button id="saveProfileBtn" class="product-btn" type="button" style="display:none;">
+                Opslaan
+            </button>
+
+            <a class="product-btn" asp-page="/Bestellingen">
+                Mijn bestellingen bekijken
+            </a>
+
+            <p id="profileMessage" style="margin-top: 20px;"></p>
+
+        </div>
+
+    </section>
 </div>
+
+@section Scripts {
+    <script src="~/js/profiel.js" asp-append-version="true"></script>
+}

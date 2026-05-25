@@ -1,198 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>@ViewData["Title"] - KE03_INTDEV_SE_1_Base</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - KE03_INTDEV_SE_1_Base</title>
 
-	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-	<link rel="stylesheet" href="~/KE03_INTDEV_SE_1_Base.styles.css" asp-append-version="true" />
-
-	<link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="css/site.css" />
-	<link rel="stylesheet" href="KE03_INTDEV_SE_1_Base.styles.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/KE03_INTDEV_SE_1_Base.styles.css" asp-append-version="true" />
 </head>
 
 <body>
-	<header class="matrix-header">
+    <header class="matrix-header">
+        <div class="header-top">
 
-		<div class="header-top">
+            <a asp-page="/Index" class="matrix-logo">Matrix Inc</a>
 
-			<a asp-page="/Index" class="matrix-logo">
-				Matrix Inc
-			</a>
+            <div class="header-search">
+                <form class="search-form">
+                    <input type="text" class="header-search-input" />
+                    <button type="submit" class="search-btn">⌕</button>
+                </form>
+            </div>
 
-			<div class="header-search">
-				<form class="search-form">
-					<input type="text"
-						   class="header-search-input"
-						   placeholder="" />
+            <div class="header-icons">
+                <a asp-page="/Wishlist" class="nav-icon-btn">
+                    <svg class="icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z" />
+                    </svg>
+                </a>
 
-					<button type="submit" class="search-btn">
-						⌕
-					</button>
-				</form>
-			</div>
+                <a asp-page="/Winkelwagen" id="cartIconBtn" class="nav-icon-btn">
+                    <svg class="icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 6h13" />
+                    </svg>
+                </a>
 
-			<div class="header-icons">
+                <div class="dropdown">
+                    <button class="nav-icon-btn dropdown-toggle"
+                            id="profileDropdown"
+                            type="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        <svg class="icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                  d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM4 20a8 8 0 0 1 16 0" />
+                        </svg>
+                    </button>
 
-				<a asp-page="Wishlist" class="nav-icon-btn">
-					<svg class="icon-svg"
-						 xmlns="http://www.w3.org/2000/svg"
-						 viewBox="0 0 24 24"
-						 fill="none"
-						 stroke="currentColor">
-						<path stroke-linecap="round"
-							  stroke-linejoin="round"
-							  stroke-width="1.8"
-							  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z" />
-					</svg>
-				</a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                        <li>
+                            <a class="dropdown-item" asp-page="/Profiel">Mijn Matrix</a>
+                        </li>
 
-		<a asp-page="/Winkelwagen" id="cartIconBtn" class="nav-icon-btn">
-					<svg class="icon-svg"
-						 xmlns="http://www.w3.org/2000/svg"
-						 viewBox="0 0 24 24"
-						 fill="none"
-						 stroke="currentColor">
-						<path stroke-linecap="round"
-							  stroke-linejoin="round"
-							  stroke-width="1.8"
-							  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 6h13" />
-					</svg>
-				</a>
+                        <li class="d-none" id="ordersBtnContainer">
+                            <a class="dropdown-item" asp-page="/Bestellingen">Mijn Bestellingen</a>
+                        </li>
 
-				<div class="dropdown">
-					<button class="nav-icon-btn dropdown-toggle" id="profileDropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-						<svg class="icon-svg"
-							 xmlns="http://www.w3.org/2000/svg"
-							 viewBox="0 0 24 24"
-							 fill="none"
-							 stroke="currentColor">
-							<path stroke-linecap="round"
-								  stroke-linejoin="round"
-								  stroke-width="1.8"
-								  d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM4 20a8 8 0 0 1 16 0" />
-						</svg>
-					</button>
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
 
-					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-						<li>
-							<a class="dropdown-item" asp-page="Profiel">Mijn Matrix</a>
-						</li>
+                        <li>
+                            <button type="button" class="dropdown-item" id="openLoginBtn">
+                                Inloggen
+                            </button>
+                        </li>
 
-						<li>
-							<hr class="dropdown-divider" />
-						</li>
+                        <li>
+                            <div class="dropdown-item d-none" id="loggedInUser"></div>
+                        </li>
 
-						<li>
-							<button type="button" class="dropdown-item" id="openLoginBtn">
-								Inloggen
-							</button>
-						</li>
-					</ul>
-				</div>
+                        <li>
+                            <button type="button" class="dropdown-item d-none" id="logoutBtn">
+                                Uitloggen
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-			</div>
-		</div>
+        <nav class="header-nav">
+            <a asp-page="/Index" class="nav-tab active-tab">Thuis</a>
+            <a asp-page="/Producten" class="nav-tab">Producten</a>
+            <a asp-page="/Bestellingen" class="nav-tab">Bestellingen</a>
+            <a asp-page="/Acties" class="nav-tab">Acties</a>
 
-		<nav class="header-nav">
+            <div class="nav-dropdown">
+                <button class="nav-tab dropdown-btn" id="categoryDropdownBtn">
+                    Alle categorieën ▼
+                </button>
 
-			<a asp-page="/Index" class="nav-tab active-tab">
-				Thuis
-			</a>
+                <div class="dropdown-menu-custom" id="categoryDropdown">
+                    <a asp-page="/Categorieën" asp-route-category="licht" class="dropdown-item-custom">Licht</a>
+                    <a asp-page="/Categorieën" asp-route-category="beveiliging" class="dropdown-item-custom">Beveiliging</a>
+                    <a asp-page="/Categorieën" asp-route-category="batterijen" class="dropdown-item-custom">Batterijen</a>
+                    <a asp-page="/Categorieën" asp-route-category="auto-onderdelen" class="dropdown-item-custom">Auto onderdelen</a>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-			<a asp-page="/Producten" class="nav-tab">
-				Producten
-			</a>
+    <div id="loginPopup" class="login-popup">
+        <div class="login-popup-content">
+            <button id="closeLoginBtn" class="login-close-btn" type="button">&times;</button>
 
-			<a asp-page="/Bestellingen" class="nav-tab">
-				Bestellingen
-			</a>
+            <h2>Inloggen</h2>
 
-			<a asp-page="/Acties" class="nav-tab">
-				Acties
-			</a>
+            <form id="loginForm">
+                <label for="username">Gebruikersnaam</label>
+                <input type="text" id="username" name="username" required>
 
-			<div class="nav-dropdown">
+                <label for="password">Wachtwoord</label>
+                <input type="password" id="password" name="password" required>
 
-				<button class="nav-tab dropdown-btn" id="categoryDropdownBtn">
-					Alle categorieën ▼
-				</button>
+                <button type="submit" class="login-submit-btn">
+                    Inloggen
+                </button>
 
-				<div class="dropdown-menu-custom" id="categoryDropdown">
+                <button type="button" class="login-submit-btn">
+                    Registreer
+                </button>
+            </form>
 
-					<a asp-page="/Categorieën"
-					   asp-route-category="licht"
-					   class="dropdown-item-custom">
-						Licht
-					</a>
+            <p id="loginMessage"></p>
+        </div>
+    </div>
 
-					<a asp-page="/Categorieën"
-					   asp-route-category="beveiliging"
-					   class="dropdown-item-custom">
-						Beveiliging
-					</a>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
 
-					<a asp-page="/Categorieën"
-					   asp-route-category="batterijen"
-					   class="dropdown-item-custom">
-						Batterijen
-					</a>
+    <footer>
+        <div class="container">
+            <f>&copy; 2025 - KE03_INTDEV_SE_1_Base - </f>
+            <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
 
-					<a asp-page="/Categorieën"
-					   asp-route-category="auto-onderdelen"
-					   class="dropdown-item-custom">
-						Auto onderdelen
-					</a>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/login.js" asp-append-version="true"></script>
 
-				</div>
-			</div>
-		</nav>
-	</header>
-
-	<div id="loginPopup" class="login-popup">
-		<div class="login-popup-content">
-			<button id="closeLoginBtn" class="login-close-btn" type="button">&times;</button>
-
-			<h2>Inloggen</h2>
-
-			<form id="loginForm">
-				<label for="username">Gebruikersnaam</label>
-				<input type="text" id="username" name="username" required>
-
-				<label for="password">Wachtwoord</label>
-				<input type="password" id="password" name="password" required>
-
-				<button type="submit" class="login-submit-btn">
-					Inloggen
-				</button>
-			</form>
-
-			<p id="loginMessage"></p>
-		</div>
-	</div>
-
-	<div class="container">
-		<main role="main" class="pb-3">
-			@RenderBody()
-		</main>
-	</div>
-
-	<footer class="">
-		<div class="container">
-			<f>&copy; 2025 - KE03_INTDEV_SE_1_Base - </f>
-			<a asp-area="" asp-page="/Privacy">Privacy</a>
-		</div>
-	</footer>
-
-	<script src="~/lib/jquery/dist/jquery.min.js"></script>
-	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="~/js/site.js" asp-append-version="true"></script>
-	<script src="~/js/login.js" asp-append-version="true"></script>
-	<script src="~/js/winkelwagen.js" asp-append-version="true"></script>
-
-	@await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

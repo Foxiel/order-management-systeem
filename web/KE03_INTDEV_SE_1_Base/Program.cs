@@ -7,6 +7,7 @@ namespace KE03_INTDEV_SE_1_Base
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddRazorPages();
+            builder.Services.AddControllers();
 
             var app = builder.Build();
 
@@ -23,6 +24,7 @@ namespace KE03_INTDEV_SE_1_Base
 
             app.UseAuthorization();
 
+            app.MapControllers();
             app.MapRazorPages();
 
             app.Run();
