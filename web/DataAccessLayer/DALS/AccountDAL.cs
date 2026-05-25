@@ -37,5 +37,26 @@ namespace DataAccessLayer.DAL
 
             return null;
         }
+        public bool LoginByUsernameAndPassword(string username, string password)
+        {
+            using SqlConnection conn = GetConnection();
+
+            string query = @"
+            SELECT COUNT(*)
+            FROM Account
+            WHERE Username = @Username
+            AND PasswordHash = @Password";
+
+            SqlCommand cmd = new SqlCommand(query, conn);
+
+            cmd.Parameters.AddWithValue("@Username", username);
+            cmd.Parameters.AddWithValue("@Password", password);
+
+            conn.Open();
+
+            int count = Convert.ToInt32(cmd.ExecuteScalar());
+
+            return count > 0;
+        }
     }
 }

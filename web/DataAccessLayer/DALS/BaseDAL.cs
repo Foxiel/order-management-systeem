@@ -5,7 +5,7 @@ namespace DataAccessLayer.DAL
 {
     /// <summary>
     /// Deze DAL is gemaakt zodat we de connectie niet elke keer opnieuw hoeven te schrijven in een nieuwe DAL.
-    /// Hierdoor kunnen we makkelijk nieuwe DALS maken die we nodig zouden hebben zonder merge conflics te veroorzaken.
+    /// Hierdoor kunnen we makkelijk nieuwe DALs maken die we nodig hebben zonder merge conflicts te veroorzaken.
     /// </summary>
     public class BaseDAL
     {
@@ -19,7 +19,14 @@ namespace DataAccessLayer.DAL
             var password = "m4^m^dd4ScWsJF*";
 
             _connectionString =
-                $"Server={webserver};Database={database};User Id={username};Password={password};TrustServerCertificate=True;";
+                $"Server=tcp:{webserver},1433;" +
+                $"Initial Catalog={database};" +
+                $"User ID={username};" +
+                $"Password={password};" +
+                $"Encrypt=True;" +
+                $"TrustServerCertificate=False;" +
+                $"Connection Timeout=60;" +
+                $"MultipleActiveResultSets=False;";
         }
 
         protected SqlConnection GetConnection()

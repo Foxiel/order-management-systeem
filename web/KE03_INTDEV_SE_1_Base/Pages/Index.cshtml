@@ -180,47 +180,6 @@
 
     </section>
 
-    <section class="customers-section">
-
-        <div class="section-header">
-            <h2>KLANTEN</h2>
-        </div>
-
-        <div class="products-grid">
-
-            @foreach (var customer in Model.Customers)
-            {
-                <div class="product-card">
-
-                    <div class="product-image">
-                        <img src="https://aleatori.cat/random"
-                             alt="@customer.CustomerName"
-                             class="category-image">
-                    </div>
-
-                    <div class="product-content">
-
-                        <h3>@customer.CustomerName</h3>
-
-                        <p>
-                            @customer.CustomerEmail
-                        </p>
-
-                        <div class="product-bottom">
-                            <div class="product-price">
-                                Klant
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            }
-
-        </div>
-
-    </section>
-
 </div>
 
 @section Scripts {
