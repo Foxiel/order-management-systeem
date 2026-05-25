@@ -1,3 +1,4 @@
+// gemaakt door Jesse
 const SHIPPING_COST = 4.99;
 const STORAGE_KEY = "cartItems";
 
