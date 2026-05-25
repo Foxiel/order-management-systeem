@@ -1,0 +1,171 @@
+﻿/* Bestellingen (Orders) styles - self-contained, only new classes for orders page */
+
+.bestellingen-page {
+    width: 95%;
+    margin: auto;
+    padding: 30px 0 60px 0;
+    color: #ffffff;
+}
+
+.bestellingen-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.bestellingen-controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.bestellingen-search {
+    height: 48px;
+    background: #111111;
+    border: 2px solid #222222;
+    padding: 8px 14px;
+    color: #00ff66;
+    border-radius: 8px;
+    min-width: 280px;
+}
+
+.bestellingen-filters {
+    display: flex;
+    gap: 8px;
+}
+
+.bestelling-btn {
+    background: transparent;
+    color: #00ff66;
+    border: 2px solid transparent;
+    padding: 10px 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+    border-radius: 10px;
+}
+.bestelling-btn:hover { transform: translateY(-2px); color: #ffffff; }
+
+.bestelling-btn-primary {
+    background: transparent;
+    border: 2px solid #00ff66;
+    color: #00ff66;
+}
+.bestelling-btn-primary:hover {
+    background: #00ff66;
+    color: #000000;
+}
+
+.bestellingen-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.bestellingen-table th,
+.bestellingen-table td {
+    text-align: left;
+    padding: 16px 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: #b7e6c6;
+}
+.bestellingen-table th {
+    font-size: 15px;
+    color: #00ff66;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.bestellingen-table tbody tr {
+    background: transparent;
+}
+.bestellingen-table tbody tr:hover {
+    background: rgba(255,255,255,0.02);
+}
+
+.bestellingen-card {
+    display: block;
+    background: #0f0f0f;
+    border: 1px solid rgba(255,255,255,0.04);
+    padding: 16px;
+    border-radius: 16px;
+    margin-bottom: 12px;
+}
+
+.bestellingen-card .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    align-items: center;
+}
+.bestellingen-meta {
+    color: #bfecc9;
+    font-size: 14px;
+}
+
+.bestellingen-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.bestellingen-status {
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #000000;
+}
+.bestellingen-status--pending {
+    background: #00ff66;
+}
+.bestellingen-status--sent {
+    background: #ffb86b;
+}
+.bestellingen-status--completed {
+    background: #66b3ff;
+}
+.bestellingen-status--cancelled {
+    background: #ff5c5c;
+}
+
+.bestellingen-pagination {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-top: 18px;
+}
+.bestellingen-pagination .bestelling-page {
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: transparent;
+    color: #b7e6c6;
+    border: 1px solid rgba(255,255,255,0.04);
+    cursor: pointer;
+}
+.bestellingen-pagination .bestelling-page.active {
+    background: #101010;
+    color: #00ff66;
+    border-color: #00ff66;
+}
+
+/* Responsive: tables -> cards on small screens */
+@media (max-width: 850px) {
+    .bestellingen-table { display: none; }
+    .bestellingen-card { display: block; }
+    .bestellingen-search { min-width: 160px; }
+    .bestellingen-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+}
+
+/* Small polish to match page aesthetics */
+.bestellingen-empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: #b8e6c7;
+    background: rgba(255,255,255,0.02);
+    border-radius: 12px;
+    margin-top: 20px;
+}

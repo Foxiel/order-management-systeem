@@ -1,8 +1,59 @@
+@* gemaakt door Tobias  *@
 @page
-@model IndexModel
+@model KE03_INTDEV_SE_1_Base.Pages.BestellingenModel
+
 @{
-	ViewData["Title"] = "Bestellingen";
+    ViewData["Title"] = "Bestellingen";
 }
-<div>
-	<h3>Bestellingen</h3>
+<link rel="stylesheet" href="~/css/Bestellingen.css" /> 
+<div class="bestellingen-page">
+
+    <h3>Mijn Bestellingen</h3>
+
+    @if (Model.Orders == null || !Model.Orders.Any())
+    {
+        <div class="bestellingen-empty">
+            <p>Er zijn geen bestellingen gevonden.</p>
+            <p>Klantbestellingen gevonden: @(Model.Orders == null ? 0 : Model.Orders.Count)</p>
+            <p>Controleer de databaseverbinding of vul testdata in.</p>
+        </div>
+    }
+    else
+    {
+        @foreach (var bestelling in Model.Orders)
+        {
+            <div class="bestellingen-card">
+
+                <div class="bestellingen-header">
+                    <h2>Bestelling #@bestelling.OrderId</h2>
+                    <p>Datum: @bestelling.OrderDate.ToString("dd-MM-yyyy")</p>
+                    <p>Status: @bestelling.OrderStatusId</p>
+                </div>
+
+                @if (Model.OrderLines != null && Model.OrderLines.ContainsKey(bestelling.OrderId))
+                {
+                    @foreach (var product in Model.OrderLines[bestelling.OrderId])
+                    {
+                        <div class="row">
+                            <div class="bestellingen-meta">
+                                <h3>Artikel: @product.ProductEAN</h3>
+                                <p>Hoeveelheid: @product.Quantity</p>
+                            </div>
+
+                            <div class="bestellingen-actions">
+                                <div class="bestellingen-price">€ @(product.PricePerUnit * product.Quantity)
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="bestellingen-meta">Geen producten gevonden voor deze bestelling.</div>
+                }
+
+            </div>
+        }
+    }
+
 </div>
