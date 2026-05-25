@@ -16,4 +16,6 @@ public class Product
     public string ManufacturerId { get; set; } = string.Empty;
     public string SubcategoryId { get; set; } = string.Empty;
     public string? ImageUrl { get; set; }
+
+
 }
