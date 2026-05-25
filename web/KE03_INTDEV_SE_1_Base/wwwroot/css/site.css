@@ -989,6 +989,12 @@ h3 {
     letter-spacing: 2px;
     text-shadow: 0 0 20px rgba(0, 255, 100, 0.25);
 }
+.icon-svg-index {
+    width: 30px;
+    height: 30px;
+    stroke: black;
+    transition: 0.3s;
+}
 
 .container {
     width: 1200px;

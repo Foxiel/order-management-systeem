@@ -126,7 +126,6 @@
         </div>
 
     </section>
-
     <section class="products-section">
 
         <div class="section-header">
@@ -135,45 +134,65 @@
 
         <div class="products-grid">
 
-            @foreach (var product in Model.Products.Take(3))
+            @if (Model.Products.Any())
             {
-                var imageUrl = string.IsNullOrWhiteSpace(product.ImageUrl)
-                ? "https://aleatori.cat/random"
-                : product.ImageUrl;
+                foreach (var product in Model.Products.Take(3))
+                {
+                    var imageUrl = !string.IsNullOrWhiteSpace(product.ImageUrl)
+                    ? product.ImageUrl
+                    : $"https://cataas.com/cat?width=400&height=300&random={product.ProductEAN}";
 
-                <div class="product-card">
+                    <div class="product-card">
 
-                    <div class="product-image">
-                        <a asp-page="/Producten" asp-route-id="@product.ProductEAN">
+                        <div class="product-image">
                             <img src="@imageUrl"
-                                 alt="@product.ProductName"
-                                 class="category-image">
-                        </a>
-                    </div>
+                                 alt="@product.ProductName" />
+                        </div>
 
-                    <div class="product-content">
+                        <div class="product-content">
 
-                        <h3>@product.ProductName</h3>
+                            <h3>@product.ProductName</h3>
 
-                        <p>
-                            @product.ProductDescription
-                        </p>
+                            <p>
+                                @product.ProductDescription
+                            </p>
 
-                        <div class="product-bottom">
+                            <div class="product-bottom">
 
-                            <div class="product-price">
-                                @product.ProductPrice.ToString("C")
+                                <div class="product-price">
+                                    € @product.ProductPrice.ToString("F2")
+                                </div>
+                                
+                                <button type="button"
+                                        class="product-modal-add-btn"
+                                        onclick="addToCart(this, '@product.ProductEAN', '@product.ProductName', @product.ProductPrice.ToString(System.Globalization.CultureInfo.InvariantCulture), '@imageUrl')">
+                                    <svg class="icon-svg-index"
+                                         xmlns="http://www.w3.org/2000/svg"
+                                         viewBox="0 0 24 24"
+                                         fill="none"
+                                         stroke="currentColor">
+                                        <path stroke-linecap="round"
+                                              stroke-linejoin="round"
+                                              stroke-width="1.8"
+                                              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 6h13" />
+                                    </svg>
+								</button>
+                                
+
+                                <a class="product-btn" asp-page="/Producten" asp-route-id="@product.ProductEAN">
+                                    BEKIJK
+                                </a>
+
                             </div>
-
-                            <a class="product-btn" asp-page="/Producten" asp-route-id="@product.ProductEAN">
-                                BEKIJK
-                            </a>
 
                         </div>
 
                     </div>
-
-                </div>
+                }
+            }
+            else
+            {
+                <p>Er zijn geen producten gevonden.</p>
             }
 
         </div>
