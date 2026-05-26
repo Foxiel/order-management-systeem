@@ -1,19 +1,81 @@
 @page
-@model KE03_INTDEV_SE_1_Base.Pages.Product
+@model KE03_INTDEV_SE_1_Base.Pages.ProductModel
 
 @{
-    Layout = null;
+    var p = Model.Product;
+    ViewData["Title"] = p != null ? p.ProductName : "Product niet gevonden";
 }
 
-<!DOCTYPE html>
+@* Gemaakt door Fabian *@
+<div class="container py-4">
+    @if (p == null || string.IsNullOrEmpty(p.ProductEAN))
+    {
+        <div class="alert alert-warning">Product niet gevonden.</div>
+    }
+    else
+    { 
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <img src="https://cataas.com/cat?width=600&height=800"
+                         alt="@p.ProductName"
+                         class="card-img-top"
+                         style="object-fit:cover; max-height:700px;" />
+                </div>
+            </div>
 
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-<div>
-    
+            <div class="col-md-6">
+                <h1 class="mb-1">@p.ProductName</h1>
+                <p class="text-muted mb-2">
+                    @p.ProductReleaseDate.ToString("yyyy") &middot; EAN: <strong>@p.ProductEAN</strong>
+                </p>
+
+                <div class="mb-3">
+                    <span class="h3">€ @p.ProductPrice.ToString("F2")</span>
+                    <span class="ms-3 text-muted">Voorraad: @p.ProductStock</span>
+                </div>
+
+                <div class="mb-4">
+                    <label for="qty" class="form-label">Aantal</label>
+                    <div class="input-group" style="max-width:150px;">
+                        <button class="btn btn-outline-secondary" type="button" id="decreaseQty">−</button>
+                        <input type="text" id="qty" class="form-control text-center" value="1" readonly aria-label="Aantal" />
+                        <button class="btn btn-outline-secondary" type="button" id="increaseQty">+</button>
+                    </div>
+                </div>
+
+                <div class="mb-4 d-flex gap-2">
+                    <button id="addToCartBtn" class="btn btn-primary"
+                            data-product-ean="@p.ProductEAN"
+                            data-product-name="@p.ProductName">
+                        In winkelwagen
+                    </button>
+                </div>
+
+                <hr />
+
+                <h5>Beschrijving</h5>
+                <dl class="row mt-3">
+                    <dt class="col-sm-4">Gewicht</dt>
+                    <dd class="col-sm-8">@p.ProductWeightKg.ToString("0.##") kg</dd>
+
+                    <dt class="col-sm-4">Garantie</dt>
+                    <dd class="col-sm-8">@p.ProductWarrantyMonths maanden</dd>
+
+                    <dt class="col-sm-4">Fabrikant</dt>
+                    <dd class="col-sm-8">@p.ManufacturerId</dd>
+
+                    <dt class="col-sm-4">Subcategorie</dt>
+                    <dd class="col-sm-8">@p.SubcategoryId</dd>
+                </dl>
+                
+                <h5>Specificaties</h5>
+                <p>@p.ProductSpecification</p>
+            </div>
+        </div>
+    }
 </div>
-</body>
-</html>
+
+@section Scripts {
+    <script src="~/js/product.js"></script>
+}

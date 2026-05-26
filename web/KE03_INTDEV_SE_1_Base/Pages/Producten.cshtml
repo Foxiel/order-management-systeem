@@ -22,7 +22,7 @@
                 {
                     var imageUrl = !string.IsNullOrWhiteSpace(product.ImageUrl)
                     ? product.ImageUrl
-                    : $"https://cataas.com/cat?width=400&height=300&random={product.ProductEAN}";
+                    : $"https://cataas.com/cat?width=400&height=300";
 
                     <div class="product-card">
 
@@ -61,7 +61,7 @@
                                 </button>
 
                                 
-                                <a class="product-btn" asp-page="/Producten" asp-route-id="@product.ProductEAN">
+                                <a class="product-btn" asp-page="/Product" asp-route-id="@product.ProductEAN">
                                     BEKIJK
                                 </a>
 
