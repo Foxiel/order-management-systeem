@@ -9,12 +9,12 @@ namespace KE03_INTDEV_SE_1_Base.Pages
     {
         private readonly ILogger<WinkelwagenModel> _logger;
 
-        public IList<Product> Products { get; set; }
+        public IList<DataAccessLayer.Models.Product> Products { get; set; }
 
         public WinkelwagenModel(ILogger<WinkelwagenModel> logger)
         {
             _logger = logger;
-            Products = new List<Product>();
+            Products = new List<DataAccessLayer.Models.Product>();
         }
 
         public void OnGet()

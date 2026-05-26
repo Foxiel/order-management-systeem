@@ -8,14 +8,14 @@ namespace KE03_INTDEV_SE_1_Base.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
-        public IList<Customer> Customers { get; set; }
-        public IList<Product> Products { get; set; }
+        public IList<DataAccessLayer.Models.Customer> Customers { get; set; }
+        public IList<DataAccessLayer.Models.Product> Products { get; set; }
 
         public IndexModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
-            Customers = new List<Customer>();
-            Products = new List<Product>();
+            Customers = new List<DataAccessLayer.Models.Customer>();
+            Products = new List<DataAccessLayer.Models.Product>();
         }
 
         public void OnGet()
@@ -25,8 +25,6 @@ namespace KE03_INTDEV_SE_1_Base.Pages
 
             Customers = customerDAL.GetAllCustomers();
             Products = productDAL.GetAllProducts();
-
-            _logger.LogInformation($"Getting all {Customers.Count} customers and {Products.Count} products");
         }
     }
 }
