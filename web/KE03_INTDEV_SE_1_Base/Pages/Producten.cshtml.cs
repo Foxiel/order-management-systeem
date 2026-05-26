@@ -6,7 +6,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
 {
     public class ProductenModel : PageModel
     {
-        public IList<Product> Products { get; set; } = new List<Product>();
+        public IList<DataAccessLayer.Models.Product> Products { get; set; } = new List<DataAccessLayer.Models.Product>();
 
         public void OnGet()
         {
