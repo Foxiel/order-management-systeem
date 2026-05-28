@@ -4,10 +4,11 @@ const STORAGE_KEY = "cartItems";
 
 let cartItems = [];
 
+debugger;
+
 document.addEventListener("DOMContentLoaded", function () {
     loadCartFromStorage();
     updateCartDisplay();
-    bindHeaderCart();
 });
 
 // Expose addToCart globally. Supports two call signatures:
@@ -133,7 +134,7 @@ function updateCartDisplay() {
 
                 <div class="cart-item-details">
                     <h4>${item.name}</h4>
-                    <p>€${item.price.toFixed(2)}</p>
+                    <p>€${item.price?.toFixed(2)}</p>
                 </div>
 
                 <div class="cart-item-quantity">
@@ -170,6 +171,4 @@ function updateCartDisplay() {
     subtotalPrice.textContent = `€${subtotal.toFixed(2)}`;
     shippingPrice.textContent = `€${shipping.toFixed(2)}`;
     totalPrice.textContent = `€${total.toFixed(2)}`;
-
-    renderCartPreview();
 }
