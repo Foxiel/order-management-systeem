@@ -11,11 +11,13 @@ public class Product
     public decimal ProductPrice { get; set; }
     public int ProductStock { get; set; }
     public decimal ProductWeightKg { get; set; }
-    public int ProductWarrantyMonths { get; set; }
-    public DateTime ProductReleaseDate { get; set; }
-    public string ManufacturerId { get; set; } = string.Empty;
-    public string SubcategoryId { get; set; } = string.Empty;
+    public string ProductWarranty { get; set; } = string.Empty;
+    public int ManufacturerId { get; set; }
+    public int SubcategoryId { get; set; }
     public string? ImageUrl { get; set; }
+    public int huidige_voorraad { get; set; }
+    public int minimum_voorraad { get; set; }
+    public string? status { get; set; }
 
 
 }

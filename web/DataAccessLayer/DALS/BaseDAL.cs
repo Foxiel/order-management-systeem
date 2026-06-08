@@ -13,20 +13,21 @@ namespace DataAccessLayer.DAL
 
         public BaseDAL()
         {
-            var webserver = "tt-server-01.database.windows.net";
-            var database = "Matrix-inc";
+            var webserver = "matrix-server.database.windows.net";
+            var database = "matrix-db";
             var username = "server-root";
             var password = "m4^m^dd4ScWsJF*";
 
             _connectionString =
                 $"Server=tcp:{webserver},1433;" +
                 $"Initial Catalog={database};" +
+                $"Persist Security Info=False;" +
                 $"User ID={username};" +
                 $"Password={password};" +
+                $"MultipleActiveResultSets=False;" +
                 $"Encrypt=True;" +
                 $"TrustServerCertificate=False;" +
-                $"Connection Timeout=60;" +
-                $"MultipleActiveResultSets=False;";
+                $"Connection Timeout=30;";
         }
 
         protected SqlConnection GetConnection()

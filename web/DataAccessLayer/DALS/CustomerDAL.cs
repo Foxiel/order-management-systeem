@@ -13,12 +13,15 @@ namespace DataAccessLayer.DAL
             using SqlConnection conn = GetConnection();
 
             string query = @"
-                SELECT 
-                    CustomerId,
-                    CustomerName,
-                    CustomerEmail,
-                    CustomerPhone
-                FROM Customer";
+              SELECT
+                klant_id,
+                naam,
+                telefoon,
+                adres,
+                postcode,
+                woonplaats,
+                land
+            FROM Klant";
 
             SqlCommand cmd = new SqlCommand(query, conn);
 
@@ -30,10 +33,13 @@ namespace DataAccessLayer.DAL
             {
                 customers.Add(new Customer
                 {
-                    CustomerId = Convert.ToInt32(reader["CustomerId"]),
-                    CustomerName = reader["CustomerName"].ToString()!,
-                    CustomerEmail = reader["CustomerEmail"].ToString()!,
-                    CustomerPhone = reader["CustomerPhone"] == DBNull.Value ? null : reader["CustomerPhone"].ToString()
+                    CustomerId = Convert.ToInt32(reader["klant_id"]),
+                    CustomerName = reader["naam"].ToString()!,
+                    CustomerAddress = reader["adres"].ToString()!,
+                    CustomerPhone= reader["telefoon"] == DBNull.Value ? null : reader["telefoon"].ToString(),
+                    CustomerPostalCode = reader["postcode"].ToString()!,
+                    CustomerCity = reader["woonplaats"].ToString()!,
+                    CustomerCountry = reader["land"].ToString()!,
                 });
             }
 
