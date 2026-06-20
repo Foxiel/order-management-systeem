@@ -1,5 +1,4 @@
-﻿//Gemaakt door Tristan
-using DataAccessLayer.Models;
+﻿using DataAccessLayer.Models;
 using Microsoft.Data.SqlClient;
 
 namespace DataAccessLayer.DAL
@@ -8,17 +7,17 @@ namespace DataAccessLayer.DAL
     {
         public List<Category> GetAllCategories()
         {
-            List<Category> categories = new List<Category>();
+            List<Category> categories = new();
 
             using SqlConnection conn = GetConnection();
 
             string query = @"
                 SELECT
-                    CategoryId,
-                    CategoryName
-                FROM Category";
+                    categorie_id,
+                    naam
+                FROM Categorie";
 
-            SqlCommand cmd = new SqlCommand(query, conn);
+            SqlCommand cmd = new(query, conn);
 
             conn.Open();
 
@@ -28,8 +27,8 @@ namespace DataAccessLayer.DAL
             {
                 categories.Add(new Category
                 {
-                    CategoryId = reader["CategoryId"].ToString()!,
-                    CategoryName = reader["CategoryName"].ToString()!
+                    CategoryId = reader["categorie_id"].ToString()!,
+                    CategoryName = reader["naam"].ToString()!
                 });
             }
 

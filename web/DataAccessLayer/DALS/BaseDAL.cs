@@ -1,5 +1,6 @@
 ﻿//Gemaakt door Tristan
 using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace DataAccessLayer.DAL
 {
@@ -9,26 +10,7 @@ namespace DataAccessLayer.DAL
     /// </summary>
     public class BaseDAL
     {
-        protected readonly string _connectionString;
-
-        public BaseDAL()
-        {
-            var webserver = "matrix-server.database.windows.net";
-            var database = "matrix-db";
-            var username = "server-root";
-            var password = "m4^m^dd4ScWsJF*";
-
-            _connectionString =
-                $"Server=tcp:{webserver},1433;" +
-                $"Initial Catalog={database};" +
-                $"Persist Security Info=False;" +
-                $"User ID={username};" +
-                $"Password={password};" +
-                $"MultipleActiveResultSets=False;" +
-                $"Encrypt=True;" +
-                $"TrustServerCertificate=False;" +
-                $"Connection Timeout=30;";
-        }
+        private readonly string _connectionString = @"Server=tcp:sql.bsite.net\MSSQL2016;Database=coldfire0412_MatrixInc;User ID=coldfire0412_MatrixInc;Password=4LZC#jz5wCk^3kY;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;";
 
         protected SqlConnection GetConnection()
         {

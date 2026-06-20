@@ -11,4 +11,5 @@ public class Order
     public decimal ShippingCosts { get; set; }
     public int CustomerId { get; set; }
     public int ShippingAddressId { get; set; }
+    public string OrderStatus { get; internal set; }
 }

@@ -1,5 +1,4 @@
 ﻿//Gemaakt door Tristan
-
 using DataAccessLayer.Models;
 using Microsoft.Data.SqlClient;
 
@@ -9,27 +8,27 @@ namespace DataAccessLayer.DAL
     {
         public List<Product> GetAllProducts()
         {
-            List<Product> products = new List<Product>();
+            List<Product> products = new();
 
             using SqlConnection conn = GetConnection();
 
             string query = @"
                 SELECT
-                    p.product_id,
-                    p.EAN,
-                    p.leverancier_id,
-                    p.locatie_id,
-                    p.naam,
-                    p.beschrijving,
-                    p.prijs,
-                    p.gewicht,
-                    p.garantie,
-                    p.huidige_voorraad,
-                    p.minimum_voorraad,
-                    p.status
-                FROM Product p";
+                    product_id,
+                    ean,
+                    leverancier_id,
+                    locatie_id,
+                    naam,
+                    beschrijving,
+                    prijs,
+                    gewicht,
+                    garantie,
+                    huidige_voorraad,
+                    minimum_voorraad,
+                    status
+                FROM Product";
 
-            SqlCommand cmd = new SqlCommand(query, conn);
+            SqlCommand cmd = new(query, conn);
 
             conn.Open();
 
@@ -39,18 +38,14 @@ namespace DataAccessLayer.DAL
             {
                 products.Add(new Product
                 {
-                    ProductEAN = reader["EAN"].ToString()!,
+                    ProductId = Convert.ToInt32(reader["product_id"]),
+                    ProductEAN = reader["ean"].ToString()!,
                     ProductName = reader["naam"].ToString()!,
-                    ProductDescription = reader["beschrijving"] == DBNull.Value
-                    ? null
-                    : reader["beschrijving"].ToString(),
-
+                    ProductDescription = reader["beschrijving"].ToString(),
                     ProductPrice = Convert.ToDecimal(reader["prijs"]),
                     ProductWeightKg = Convert.ToDecimal(reader["gewicht"]),
                     ProductWarranty = reader["garantie"].ToString()!,
-
                     ManufacturerId = Convert.ToInt32(reader["leverancier_id"]),
-
                     huidige_voorraad = Convert.ToInt32(reader["huidige_voorraad"]),
                     minimum_voorraad = Convert.ToInt32(reader["minimum_voorraad"]),
                     status = reader["status"].ToString()
@@ -60,58 +55,58 @@ namespace DataAccessLayer.DAL
             return products;
         }
 
-        // Gemaakt door Fabian
-        public Product GetProductByEAN(string ean)
+        public Product? GetProductByEAN(string ean)
         {
-            Product product = new Product();
-
             using SqlConnection conn = GetConnection();
 
-            string query = query = @"
-        SELECT 
-            p.ProductEAN,
-            p.ProductName,
-            p.ProductDescription,
-            p.ProductSpecification,
-            p.ProductPrice,
-            p.ProductStock,
-            p.ProductWeightKg,
-            p.ProductWarrantyMonths,
-            p.ProductReleaseDate,
-            p.ManufacturerId,
-            p.SubcategoryId,
-            pi.ImageUrl
-        FROM Product p
-        LEFT JOIN ProductImage pi 
-            ON p.ProductEAN = pi.ProductEAN 
-            AND pi.IsMainImage = 1
-        WHERE p.ProductEAN = @ProductEAN";
+            string query = @"
+                SELECT
+                    p.product_id,
+                    p.ean,
+                    p.leverancier_id,
+                    p.locatie_id,
+                    p.naam,
+                    p.beschrijving,
+                    p.prijs,
+                    p.gewicht,
+                    p.garantie,
+                    p.huidige_voorraad,
+                    p.minimum_voorraad,
+                    p.status,
+                    pa.pad_locatie
+                FROM Product p
+                LEFT JOIN ProductAfbeelding pa
+                    ON p.product_id = pa.product_id
+                    AND pa.volgorde = 1
+                WHERE p.ean = @EAN";
 
-            SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@ProductEAN", ean);
+            SqlCommand cmd = new(query, conn);
+            cmd.Parameters.AddWithValue("@EAN", ean);
 
             conn.Open();
 
             using SqlDataReader reader = cmd.ExecuteReader();
+
             if (reader.Read())
             {
-                product = new Product
+                return new Product
                 {
-                    ProductEAN = reader["ProductEAN"].ToString()!,
-                    ProductName = reader["ProductName"].ToString()!,
-                    ProductDescription = reader["ProductDescription"].ToString(),
-                    ProductSpecification = reader["ProductSpecification"].ToString(),
-                    ProductPrice = Convert.ToDecimal(reader["ProductPrice"]),
-                    ProductStock = Convert.ToInt32(reader["ProductStock"]),
-                    ProductWeightKg = Convert.ToDecimal(reader["ProductWeightKg"]),
-                    ProductWarranty = reader["ProductWarranty"].ToString()!,
-                    ManufacturerId = Convert.ToInt32(reader["ManufacturerId"]),
-                    SubcategoryId = Convert.ToInt32(reader["SubcategoryId"]),
-                    ImageUrl = reader["ImageUrl"] == DBNull.Value ? null : reader["ImageUrl"].ToString()
+                    ProductId = Convert.ToInt32(reader["product_id"]),
+                    ProductEAN = reader["ean"].ToString()!,
+                    ProductName = reader["naam"].ToString()!,
+                    ProductDescription = reader["beschrijving"].ToString(),
+                    ProductPrice = Convert.ToDecimal(reader["prijs"]),
+                    ProductWeightKg = Convert.ToDecimal(reader["gewicht"]),
+                    ProductWarranty = reader["garantie"].ToString()!,
+                    ManufacturerId = Convert.ToInt32(reader["leverancier_id"]),
+                    huidige_voorraad = Convert.ToInt32(reader["huidige_voorraad"]),
+                    minimum_voorraad = Convert.ToInt32(reader["minimum_voorraad"]),
+                    status = reader["status"].ToString(),
+                    ImageUrl = reader["pad_locatie"] == DBNull.Value ? null : reader["pad_locatie"].ToString()
                 };
             }
 
-            return product;
+            return null;
         }
     }
 }

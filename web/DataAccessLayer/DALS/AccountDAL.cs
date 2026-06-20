@@ -1,10 +1,8 @@
-﻿//Gemaakt door Tristan
-using DataAccessLayer.Models;
+﻿using DataAccessLayer.Models;
 using Microsoft.Data.SqlClient;
 
 namespace DataAccessLayer.DAL
 {
-
     public class AccountDAL : BaseDAL
     {
         public Account? GetByUsername(string username)
@@ -12,45 +10,52 @@ namespace DataAccessLayer.DAL
             using SqlConnection conn = GetConnection();
 
             string query = @"
-                SELECT *
+                SELECT
+                    account_id,
+                    klant_id,
+                    email_id,
+                    gebruikersnaam,
+                    wachtwoord,
+                    account_type
                 FROM Account
-                WHERE Username = @Username";
+                WHERE gebruikersnaam = @Gebruikersnaam";
 
-            SqlCommand cmd = new SqlCommand(query, conn);
-
-            cmd.Parameters.AddWithValue("@Username", username);
+            SqlCommand cmd = new(query, conn);
+            cmd.Parameters.AddWithValue("@Gebruikersnaam", username);
 
             conn.Open();
 
-            SqlDataReader reader = cmd.ExecuteReader();
+            using SqlDataReader reader = cmd.ExecuteReader();
 
             if (reader.Read())
             {
                 return new Account
                 {
-                    AccountId = Convert.ToInt32(reader["AccountId"]),
-                    Username = reader["Username"].ToString()!,
-                    PasswordHash = reader["PasswordHash"].ToString()!,
-                    CustomerId = Convert.ToInt32(reader["CustomerId"])
+                    AccountId = Convert.ToInt32(reader["account_id"]),
+                    Username = reader["gebruikersnaam"].ToString()!,
+                    PasswordHash = reader["wachtwoord"].ToString()!,
+                    CustomerId = reader["klant_id"] == DBNull.Value ? 0 : Convert.ToInt32(reader["klant_id"]),
+                    AccountType = reader["account_type"].ToString()!
                 };
             }
 
             return null;
         }
+
         public bool LoginByUsernameAndPassword(string username, string password)
         {
             using SqlConnection conn = GetConnection();
 
             string query = @"
-            SELECT COUNT(*)
-            FROM Account
-            WHERE Username = @Username
-            AND PasswordHash = @Password";
+                SELECT COUNT(*)
+                FROM Account
+                WHERE gebruikersnaam = @Gebruikersnaam
+                AND wachtwoord = @Wachtwoord";
 
-            SqlCommand cmd = new SqlCommand(query, conn);
+            SqlCommand cmd = new(query, conn);
 
-            cmd.Parameters.AddWithValue("@Username", username);
-            cmd.Parameters.AddWithValue("@Password", password);
+            cmd.Parameters.AddWithValue("@Gebruikersnaam", username);
+            cmd.Parameters.AddWithValue("@Wachtwoord", password);
 
             conn.Open();
 

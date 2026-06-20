@@ -18,6 +18,5 @@ public class Product
     public int huidige_voorraad { get; set; }
     public int minimum_voorraad { get; set; }
     public string? status { get; set; }
-
-
+    public int ProductId { get; internal set; }
 }

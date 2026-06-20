@@ -1,5 +1,4 @@
-﻿//Gemaakt door Tristan
-using DataAccessLayer.Models;
+﻿using DataAccessLayer.Models;
 using Microsoft.Data.SqlClient;
 
 namespace DataAccessLayer.DAL
@@ -8,22 +7,22 @@ namespace DataAccessLayer.DAL
     {
         public List<Customer> GetAllCustomers()
         {
-            List<Customer> customers = new List<Customer>();
+            List<Customer> customers = new();
 
             using SqlConnection conn = GetConnection();
 
             string query = @"
-              SELECT
-                klant_id,
-                naam,
-                telefoon,
-                adres,
-                postcode,
-                woonplaats,
-                land
-            FROM Klant";
+                SELECT
+                    klant_id,
+                    naam,
+                    telefoon,
+                    adres,
+                    postcode,
+                    woonplaats,
+                    land
+                FROM Klant";
 
-            SqlCommand cmd = new SqlCommand(query, conn);
+            SqlCommand cmd = new(query, conn);
 
             conn.Open();
 
@@ -35,11 +34,11 @@ namespace DataAccessLayer.DAL
                 {
                     CustomerId = Convert.ToInt32(reader["klant_id"]),
                     CustomerName = reader["naam"].ToString()!,
+                    CustomerPhone = reader["telefoon"].ToString(),
                     CustomerAddress = reader["adres"].ToString()!,
-                    CustomerPhone= reader["telefoon"] == DBNull.Value ? null : reader["telefoon"].ToString(),
                     CustomerPostalCode = reader["postcode"].ToString()!,
                     CustomerCity = reader["woonplaats"].ToString()!,
-                    CustomerCountry = reader["land"].ToString()!,
+                    CustomerCountry = reader["land"].ToString()!
                 });
             }
 
@@ -51,33 +50,31 @@ namespace DataAccessLayer.DAL
             using SqlConnection conn = GetConnection();
 
             string query = @"
-        SELECT TOP 1
-            c.CustomerId,
-            c.CustomerName,
-            c.CustomerEmail,
-            c.CustomerPhone,
+                SELECT TOP 1
+                    k.klant_id,
+                    k.naam,
+                    k.telefoon,
+                    k.adres,
+                    k.postcode,
+                    k.woonplaats,
+                    k.land,
+                    e.email,
+                    ba.adres_id,
+                    ba.adres AS bezorg_adres,
+                    ba.postcode AS bezorg_postcode,
+                    ba.woonplaats AS bezorg_woonplaats,
+                    ba.land AS bezorg_land
+                FROM Account a
+                INNER JOIN Klant k
+                    ON a.klant_id = k.klant_id
+                INNER JOIN Email e
+                    ON a.email_id = e.email_id
+                LEFT JOIN BezorgAdres ba
+                    ON k.klant_id = ba.klant_id
+                WHERE a.gebruikersnaam = @Gebruikersnaam";
 
-            ad.AddressId,
-            ad.Street,
-            ad.HouseNumber,
-            ad.PostalCode,
-            ad.City,
-            ad.Country,
-            ad.AddressType
-
-        FROM Account a
-
-        INNER JOIN Customer c
-            ON a.CustomerId = c.CustomerId
-
-        LEFT JOIN Address ad
-            ON c.CustomerId = ad.CustomerId
-
-        WHERE a.Username = @Username";
-
-            SqlCommand cmd = new SqlCommand(query, conn);
-
-            cmd.Parameters.AddWithValue("@Username", username);
+            SqlCommand cmd = new(query, conn);
+            cmd.Parameters.AddWithValue("@Gebruikersnaam", username);
 
             conn.Open();
 
@@ -87,54 +84,16 @@ namespace DataAccessLayer.DAL
             {
                 return new CustomerProfile
                 {
-                    CustomerId =
-                        Convert.ToInt32(reader["CustomerId"]),
+                    CustomerId = Convert.ToInt32(reader["klant_id"]),
+                    CustomerName = reader["naam"].ToString()!,
+                    CustomerEmail = reader["email"].ToString()!,
+                    CustomerPhone = reader["telefoon"].ToString(),
 
-                    CustomerName =
-                        reader["CustomerName"].ToString()!,
-
-                    CustomerEmail =
-                        reader["CustomerEmail"].ToString()!,
-
-                    CustomerPhone =
-                        reader["CustomerPhone"] == DBNull.Value
-                            ? null
-                            : reader["CustomerPhone"].ToString(),
-
-                    AddressId =
-                        reader["AddressId"] == DBNull.Value
-                            ? null
-                            : Convert.ToInt32(reader["AddressId"]),
-
-                    Street =
-                        reader["Street"] == DBNull.Value
-                            ? null
-                            : reader["Street"].ToString(),
-
-                    HouseNumber =
-                        reader["HouseNumber"] == DBNull.Value
-                            ? null
-                            : reader["HouseNumber"].ToString(),
-
-                    PostalCode =
-                        reader["PostalCode"] == DBNull.Value
-                            ? null
-                            : reader["PostalCode"].ToString(),
-
-                    City =
-                        reader["City"] == DBNull.Value
-                            ? null
-                            : reader["City"].ToString(),
-
-                    Country =
-                        reader["Country"] == DBNull.Value
-                            ? null
-                            : reader["Country"].ToString(),
-
-                    AddressType =
-                        reader["AddressType"] == DBNull.Value
-                            ? null
-                            : reader["AddressType"].ToString()
+                    AddressId = reader["adres_id"] == DBNull.Value ? null : Convert.ToInt32(reader["adres_id"]),
+                    Street = reader["bezorg_adres"] == DBNull.Value ? reader["adres"].ToString() : reader["bezorg_adres"].ToString(),
+                    PostalCode = reader["bezorg_postcode"] == DBNull.Value ? reader["postcode"].ToString() : reader["bezorg_postcode"].ToString(),
+                    City = reader["bezorg_woonplaats"] == DBNull.Value ? reader["woonplaats"].ToString() : reader["bezorg_woonplaats"].ToString(),
+                    Country = reader["bezorg_land"] == DBNull.Value ? reader["land"].ToString() : reader["bezorg_land"].ToString()
                 };
             }
 
@@ -146,39 +105,45 @@ namespace DataAccessLayer.DAL
             using SqlConnection conn = GetConnection();
 
             string query = @"
-        UPDATE Customer
-        SET
-            CustomerName = @CustomerName,
-            CustomerEmail = @CustomerEmail,
-            CustomerPhone = @CustomerPhone
-        WHERE CustomerId = @CustomerId;
+                UPDATE Klant
+                SET
+                    naam = @Naam,
+                    telefoon = @Telefoon,
+                    adres = @Adres,
+                    postcode = @Postcode,
+                    woonplaats = @Woonplaats,
+                    land = @Land
+                WHERE klant_id = @KlantId;
 
-        UPDATE Address
-        SET
-            Street = @Street,
-            HouseNumber = @HouseNumber,
-            PostalCode = @PostalCode,
-            City = @City,
-            Country = @Country,
-            AddressType = @AddressType
-        WHERE AddressId = @AddressId
-        AND CustomerId = @CustomerId;
-    ";
+                UPDATE Email
+                SET email = @Email
+                WHERE email_id = (
+                    SELECT email_id
+                    FROM Account
+                    WHERE klant_id = @KlantId
+                );
 
-            SqlCommand cmd = new SqlCommand(query, conn);
+                UPDATE BezorgAdres
+                SET
+                    adres = @Adres,
+                    postcode = @Postcode,
+                    woonplaats = @Woonplaats,
+                    land = @Land
+                WHERE adres_id = @AdresId
+                AND klant_id = @KlantId;
+            ";
 
-            cmd.Parameters.AddWithValue("@CustomerId", profile.CustomerId);
-            cmd.Parameters.AddWithValue("@CustomerName", profile.CustomerName);
-            cmd.Parameters.AddWithValue("@CustomerEmail", profile.CustomerEmail);
-            cmd.Parameters.AddWithValue("@CustomerPhone", (object?)profile.CustomerPhone ?? DBNull.Value);
+            SqlCommand cmd = new(query, conn);
 
-            cmd.Parameters.AddWithValue("@AddressId", (object?)profile.AddressId ?? DBNull.Value);
-            cmd.Parameters.AddWithValue("@Street", (object?)profile.Street ?? DBNull.Value);
-            cmd.Parameters.AddWithValue("@HouseNumber", (object?)profile.HouseNumber ?? DBNull.Value);
-            cmd.Parameters.AddWithValue("@PostalCode", (object?)profile.PostalCode ?? DBNull.Value);
-            cmd.Parameters.AddWithValue("@City", (object?)profile.City ?? DBNull.Value);
-            cmd.Parameters.AddWithValue("@Country", (object?)profile.Country ?? DBNull.Value);
-            cmd.Parameters.AddWithValue("@AddressType", (object?)profile.AddressType ?? DBNull.Value);
+            cmd.Parameters.AddWithValue("@KlantId", profile.CustomerId);
+            cmd.Parameters.AddWithValue("@Naam", profile.CustomerName);
+            cmd.Parameters.AddWithValue("@Email", profile.CustomerEmail);
+            cmd.Parameters.AddWithValue("@Telefoon", (object?)profile.CustomerPhone ?? DBNull.Value);
+            cmd.Parameters.AddWithValue("@AdresId", (object?)profile.AddressId ?? DBNull.Value);
+            cmd.Parameters.AddWithValue("@Adres", (object?)profile.Street ?? DBNull.Value);
+            cmd.Parameters.AddWithValue("@Postcode", (object?)profile.PostalCode ?? DBNull.Value);
+            cmd.Parameters.AddWithValue("@Woonplaats", (object?)profile.City ?? DBNull.Value);
+            cmd.Parameters.AddWithValue("@Land", (object?)profile.Country ?? DBNull.Value);
 
             conn.Open();
 

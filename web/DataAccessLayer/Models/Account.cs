@@ -12,4 +12,5 @@ public class Account
     public DateTime CreatedAt { get; set; }
     public DateTime? LastLogin { get; set; }
     public int CustomerId { get; set; }
+    public string AccountType { get; internal set; }
 }
