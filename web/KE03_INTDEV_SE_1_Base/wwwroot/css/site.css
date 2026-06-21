@@ -1814,3 +1814,41 @@ f {
     color: #a8a8a8;
     margin-bottom: 20px;
 }
+
+.payment-form h3 {
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+
+    .payment-form h3:first-child {
+        margin-top: 0;
+    }
+
+.payment-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.payment-option {
+    display: flex !important;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    background: #050505;
+    border: 1px solid rgba(0,255,100,0.25);
+    border-radius: 12px;
+    color: #00ff66;
+    cursor: pointer;
+}
+
+    .payment-option input {
+        width: auto;
+        height: auto;
+        margin: 0;
+    }
+
+    .payment-option span {
+        font-weight: 700;
+    }
