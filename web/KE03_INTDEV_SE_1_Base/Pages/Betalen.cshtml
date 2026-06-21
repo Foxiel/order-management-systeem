@@ -1,0 +1,114 @@
+@page
+@model BetalenModel
+@{
+    ViewData["Title"] = "Betalen";
+}
+
+<div class="matrix-page">
+
+    <section class="checkout-section">
+
+        <div class="section-header">
+            <h2>BETALEN</h2>
+        </div>
+
+        <div class="checkout-container">
+
+            <!-- LINKS: BETAALVELDEN -->
+            <!-- LINKS: BETAALVELDEN -->
+            <form class="payment-form">
+
+                <h3>Gegevens</h3>
+
+                <label>Voor- en achternaam</label>
+                <input type="text" placeholder="Bijvoorbeeld: Jesse Ponsens" />
+
+                <label>E-mailadres</label>
+                <input type="email" placeholder="naam@email.nl" />
+
+                <label>Telefoonnummer</label>
+                <input type="text" placeholder="06 12345678" />
+
+                <h3>Bezorgadres</h3>
+
+                <label>Straat en huisnummer</label>
+                <input type="text" placeholder="Straatnaam 12" />
+
+                <div class="payment-row">
+                    <div>
+                        <label>Postcode</label>
+                        <input type="text" placeholder="1234 AB" />
+                    </div>
+
+                    <div>
+                        <label>Plaats</label>
+                        <input type="text" placeholder="Maastricht" />
+                    </div>
+                </div>
+
+                <h3>Betaalmethode</h3>
+
+                <div class="payment-methods">
+                    <label class="payment-option">
+                        <input type="radio" name="paymentMethod" checked />
+                        <span>iDEAL</span>
+                    </label>
+
+                    <label class="payment-option">
+                        <input type="radio" name="paymentMethod" />
+                        <span>Creditcard</span>
+                    </label>
+
+                    <label class="payment-option">
+                        <input type="radio" name="paymentMethod" />
+                        <span>PayPal</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="pay-btn">
+                    BESTELLING PLAATSEN
+                </button>
+
+            </form>
+
+            <!-- RECHTS: KOSTEN VAK -->
+            <aside class="checkout-summary">
+
+                <h3>Kosten</h3>
+
+                <div id="paymentProducts"></div>
+
+                <div class="summary-divider"></div>
+
+                <div class="summary-line">
+                    <span>Totaal artikelen:</span>
+                    <span id="paymentItemCount">0</span>
+                </div>
+
+                <div class="summary-line">
+                    <span>Subtotaal:</span>
+                    <span id="paymentSubtotal">€0.00</span>
+                </div>
+
+                <div class="summary-line">
+                    <span>Verzendkosten:</span>
+                    <span id="paymentShipping">€0.00</span>
+                </div>
+
+                <div class="summary-divider"></div>
+
+                <div class="summary-line total">
+                    <span>Totaal:</span>
+                    <span id="paymentTotal">€0.00</span>
+                </div>
+
+            </aside>
+
+        </div>
+
+    </section>
+
+</div>
+@section Scripts {
+    <script src="~/js/betalen.js"></script>
+}
