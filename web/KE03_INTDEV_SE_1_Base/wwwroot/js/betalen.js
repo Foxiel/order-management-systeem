@@ -67,4 +67,22 @@ document.addEventListener("DOMContentLoaded", function () {
     paymentSubtotal.textContent = `€${subtotal.toFixed(2)}`;
     paymentShipping.textContent = `€${shipping.toFixed(2)}`;
     paymentTotal.textContent = `€${total.toFixed(2)}`;
+
+    const paymentForm = document.getElementById("paymentForm");
+    const cartJsonInput = document.getElementById("cartJsonInput");
+
+    if (paymentForm && cartJsonInput) {
+        paymentForm.addEventListener("submit", function () {
+
+            const cart = localStorage.getItem("cartItems");
+
+            if (cart) {
+                cartJsonInput.value = cart;
+            }
+            else {
+                cartJsonInput.value = "[]";
+            }
+
+        });
+    }
 });

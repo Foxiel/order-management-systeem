@@ -151,5 +151,59 @@ namespace DataAccessLayer.DAL
 
             return rowsAffected > 0;
         }
+        public CustomerProfile? GetCustomerProfileById(int klantId)
+        {
+            using SqlConnection conn = GetConnection();
+
+            string query = @"
+        SELECT TOP 1
+            k.klant_id,
+            k.naam,
+            k.telefoon,
+            k.adres,
+            k.postcode,
+            k.woonplaats,
+            k.land,
+            e.email,
+            ba.adres_id,
+            ba.adres AS bezorg_adres,
+            ba.postcode AS bezorg_postcode,
+            ba.woonplaats AS bezorg_woonplaats,
+            ba.land AS bezorg_land
+        FROM Klant k
+        INNER JOIN Account a
+            ON a.klant_id = k.klant_id
+        INNER JOIN Email e
+            ON a.email_id = e.email_id
+        LEFT JOIN BezorgAdres ba
+            ON ba.klant_id = k.klant_id
+        WHERE k.klant_id = @KlantId";
+
+            SqlCommand cmd = new(query, conn);
+            cmd.Parameters.AddWithValue("@KlantId", klantId);
+
+            conn.Open();
+
+            using SqlDataReader reader = cmd.ExecuteReader();
+
+            if (reader.Read())
+            {
+                return new CustomerProfile
+                {
+                    CustomerId = Convert.ToInt32(reader["klant_id"]),
+                    CustomerName = reader["naam"].ToString()!,
+                    CustomerEmail = reader["email"].ToString()!,
+                    CustomerPhone = reader["telefoon"].ToString(),
+
+                    AddressId = reader["adres_id"] == DBNull.Value ? null : Convert.ToInt32(reader["adres_id"]),
+                    Street = reader["bezorg_adres"] == DBNull.Value ? reader["adres"].ToString() : reader["bezorg_adres"].ToString(),
+                    PostalCode = reader["bezorg_postcode"] == DBNull.Value ? reader["postcode"].ToString() : reader["bezorg_postcode"].ToString(),
+                    City = reader["bezorg_woonplaats"] == DBNull.Value ? reader["woonplaats"].ToString() : reader["bezorg_woonplaats"].ToString(),
+                    Country = reader["bezorg_land"] == DBNull.Value ? reader["land"].ToString() : reader["bezorg_land"].ToString()
+                };
+            }
+
+            return null;
+        }
     }
 }

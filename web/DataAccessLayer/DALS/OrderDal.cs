@@ -227,5 +227,65 @@ namespace DataAccessLayer.DAL
             conn.Open();
             cmd.ExecuteNonQuery();
         }
+
+        public int AddOrderAndReturnId(Order order)
+        {
+            using SqlConnection conn = GetConnection();
+
+            string query = @"
+        INSERT INTO Bestelling
+        (
+            klant_id,
+            order_datum,
+            order_status
+        )
+        VALUES
+        (
+            @KlantId,
+            @OrderDatum,
+            @order_status
+        );
+
+        SELECT CAST(SCOPE_IDENTITY() AS int);";
+
+            SqlCommand cmd = new(query, conn);
+
+            cmd.Parameters.AddWithValue("@KlantId", order.CustomerId);
+            cmd.Parameters.AddWithValue("@OrderDatum", order.OrderDate);
+            cmd.Parameters.AddWithValue("@order_status", order.OrderStatusId);
+
+            conn.Open();
+
+            return Convert.ToInt32(cmd.ExecuteScalar());
+        }
+
+        public void AddOrderLineByEan(OrderLine orderLine)
+        {
+            using SqlConnection conn = GetConnection();
+
+            string query = @"
+        INSERT INTO Bestelregel
+        (
+            bestelling_id,
+            product_id,
+            aantal
+        )
+        SELECT
+            @BestellingId,
+            product_id,
+            @Aantal
+        FROM Product
+        WHERE ean = @Ean";
+
+            SqlCommand cmd = new(query, conn);
+
+            cmd.Parameters.AddWithValue("@BestellingId", orderLine.OrderId);
+            cmd.Parameters.AddWithValue("@Ean", orderLine.ProductEAN);
+            cmd.Parameters.AddWithValue("@Aantal", orderLine.Quantity);
+
+            conn.Open();
+            cmd.ExecuteNonQuery();
+        }
     }
+
 }
