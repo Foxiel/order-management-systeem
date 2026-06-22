@@ -49,7 +49,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
 
             Order order = new Order
             {
-                CustomerId = 501,
+                CustomerId = 500,
                 OrderDate = DateTime.Now,
                 OrderStatusId = 0,
                 ShippingCosts = 4.99m
