@@ -21,8 +21,8 @@
                 foreach (var product in Model.Products)
                 {
                     var imageUrl = !string.IsNullOrWhiteSpace(product.ImageUrl)
-                    ? product.ImageUrl
-                    : $"https://cataas.com/cat?width=400&height=300";
+                        ? product.ImageUrl
+                        : $"https://cataas.com/cat?width=400&height=300&random={product.ProductEAN}";
 
                     <div class="product-card">
 
