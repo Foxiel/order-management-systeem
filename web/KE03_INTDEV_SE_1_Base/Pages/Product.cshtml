@@ -6,71 +6,79 @@
     ViewData["Title"] = p != null ? p.ProductName : "Product niet gevonden";
 }
 
-@* Gemaakt door Fabian *@
-<div class="container py-4">
+<div class="product-page">
     @if (p == null || string.IsNullOrEmpty(p.ProductEAN))
     {
-        <div class="alert alert-warning">Product niet gevonden.</div>
+        <div class="product-panel product-not-found">
+            <div class="alert alert-warning mb-0">Product niet gevonden.</div>
+        </div>
     }
     else
-    { 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card mb-3">
-                    <img src="https://cataas.com/cat?width=600&height=800"
-                         alt="@p.ProductName"
-                         class="card-img-top"
-                         style="object-fit:cover; max-height:700px;" />
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <h1 class="mb-1">@p.ProductName</h1>
-                <p class="text-muted mb-2">
-					@* @p.ProductReleaseDate.ToString("yyyy") &middot; *@EAN: <strong>@p.ProductEAN</strong>
-                </p>
-
-                <div class="mb-3">
-                    <span class="h3">€ @p.ProductPrice.ToString("F2")</span>
-                    <span class="ms-3 text-muted">Voorraad: @p.ProductStock</span>
-                </div>
-
-                <div class="mb-4">
-                    <label for="qty" class="form-label">Aantal</label>
-                    <div class="input-group" style="max-width:150px;">
-                        <button class="btn btn-outline-secondary" type="button" id="decreaseQty">−</button>
-                        <input type="text" id="qty" class="form-control text-center" value="1" readonly aria-label="Aantal" />
-                        <button class="btn btn-outline-secondary" type="button" id="increaseQty">+</button>
+    {
+        <div class="product-panel">
+            <div class="row g-4 align-items-start">
+                <div class="col-lg-6">
+                    <div class="product-image-card">
+                        <img src="https://cataas.com/cat?width=600&height=800"
+                             alt="@p.ProductName"
+                             class="img-fluid"
+                             style="object-fit:cover; width:100%; height:100%; max-height:700px;" />
                     </div>
                 </div>
 
-                <div class="mb-4 d-flex gap-2">
-                    <button id="addToCartBtn" class="btn btn-primary"
-                            data-product-ean="@p.ProductEAN"
-                            data-product-name="@p.ProductName">
-                        In winkelwagen
-                    </button>
+                <div class="col-lg-6">
+                    <div class="product-info">
+                        <p class="product-kicker">Product detail</p>
+                        <h1 class="product-title">@p.ProductName</h1>
+
+                        <p class="product-meta">
+                            EAN: <strong>@p.ProductEAN</strong>
+                        </p>
+
+                        <div class="product-price-row">
+                            <span class="product-price">€ @p.ProductPrice.ToString("F2")</span>
+                            <span class="product-stock">Voorraad: @p.ProductStock</span>
+                        </div>
+
+                        <div class="product-quantity-block">
+                            <label for="qty" class="product-label">Aantal</label>
+                            <div class="input-group product-qty-group">
+                                <button class="qty-btn" type="button" id="decreaseQty">−</button>
+                                <input type="text" id="qty" class="qty-input" value="1" readonly aria-label="Aantal" />
+                                <button class="qty-btn" type="button" id="increaseQty">+</button>
+                            </div>
+                        </div>
+
+                        <div class="product-actions">
+                            <button id="addToCartBtn"
+                                    class="product-btn"
+                                    data-product-ean="@p.ProductEAN"
+                                    data-product-name="@p.ProductName">
+                                In winkelwagen
+                            </button>
+                        </div>
+
+                        <hr class="product-divider" />
+
+                        <h5 class="product-section-title">Beschrijving</h5>
+                        <dl class="row product-spec-list">
+                            <dt class="col-sm-4">Gewicht</dt>
+                            <dd class="col-sm-8">@p.ProductWeightKg.ToString("0.##") kg</dd>
+
+                            <dt class="col-sm-4">Garantie</dt>
+                            <dd class="col-sm-8">@p.ProductWarranty maanden</dd>
+
+                            <dt class="col-sm-4">Fabrikant</dt>
+                            <dd class="col-sm-8">@p.ManufacturerId</dd>
+
+                            <dt class="col-sm-4">Subcategorie</dt>
+                            <dd class="col-sm-8">@p.SubcategoryId</dd>
+                        </dl>
+
+                        <h5 class="product-section-title">Specificaties</h5>
+                        <p class="product-spec-text">@p.ProductSpecification</p>
+                    </div>
                 </div>
-
-                <hr />
-
-                <h5>Beschrijving</h5>
-                <dl class="row mt-3">
-                    <dt class="col-sm-4">Gewicht</dt>
-                    <dd class="col-sm-8">@p.ProductWeightKg.ToString("0.##") kg</dd>
-
-                    <dt class="col-sm-4">Garantie</dt>
-                    <dd class="col-sm-8">@p.ProductWarranty maanden</dd>
-
-                    <dt class="col-sm-4">Fabrikant</dt>
-                    <dd class="col-sm-8">@p.ManufacturerId</dd>
-
-                    <dt class="col-sm-4">Subcategorie</dt>
-                    <dd class="col-sm-8">@p.SubcategoryId</dd>
-                </dl>
-                
-                <h5>Specificaties</h5>
-                <p>@p.ProductSpecification</p>
             </div>
         </div>
     }

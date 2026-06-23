@@ -38,8 +38,10 @@
         el.style.position = 'absolute';
         el.style.top = '8px';
         el.style.right = '8px';
-        el.style.background = 'rgba(0,0,0,0.8)';
-        el.style.color = '#fff';
+        el.style.background = 'rgba(16,16,16,0.95)';
+        el.style.color = '#00ff66';
+        el.style.border = '1px solid rgba(0,255,100,0.25)';
+        el.style.boxShadow = '0 0 20px rgba(0,255,100,0.15)';
         el.style.padding = '6px 10px';
         el.style.borderRadius = '14px';
         el.style.fontSize = '0.875rem';
