@@ -10,9 +10,9 @@ namespace KE03_INTDEV_SE_1_Base.Pages
 
         public void OnGet()
         {
-            ProductDAL productDAL = new ProductDAL();
+            ProductRepository productRepository = new ProductRepository();
 
-            Products = productDAL.GetAllProducts();
+            Products = productRepository.GetAllProducts();
         }
     }
 }

@@ -4,7 +4,7 @@ using Microsoft.Data.SqlClient;
 
 namespace DataAccessLayer.DAL
 {
-    public class ProductDAL : BaseDAL
+    public class ProductRepository : dbContext
     {
         public List<Product> GetAllProducts()
         {
