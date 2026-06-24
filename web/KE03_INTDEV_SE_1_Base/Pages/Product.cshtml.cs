@@ -19,8 +19,8 @@ namespace KE03_INTDEV_SE_1_Base.Pages
                 return;
             }
 
-            ProductDAL productDAL = new ProductDAL();
-            Product = productDAL.GetProductByEAN(id);
+            ProductRepository productRepository = new ProductRepository();
+            Product = productRepository.GetProductByEAN(id);
 
             // Als jouw DAL een 'default' Product teruggeeft bij niet-gevonden,
             // kun je hier extra checken: if (Product != null && string.IsNullOrEmpty(Product.ProductEAN)) Product = null;

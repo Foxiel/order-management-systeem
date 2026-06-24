@@ -11,9 +11,9 @@ namespace KE03_INTDEV_SE_1_Base.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginRequest request)
         {
-            AccountDAL accountDAL = new AccountDAL();
+            AccountRepository accountRepository = new AccountRepository();
 
-            bool success = accountDAL.LoginByUsernameAndPassword(
+            bool success = accountRepository.LoginByUsernameAndPassword(
                 request.Username,
                 request.Password
             );
@@ -27,9 +27,9 @@ namespace KE03_INTDEV_SE_1_Base.Controllers
         [HttpGet("profile/{username}")]
         public IActionResult GetProfile(string username)
         {
-            CustomerDAL customerDAL = new CustomerDAL();
+            CustomerRepository customerRepository = new CustomerRepository();
 
-            CustomerProfile? profile = customerDAL.GetCustomerProfileByUsername(username);
+            CustomerProfile? profile = customerRepository.GetCustomerProfileByUsername(username);
 
             if (profile == null)
             {
@@ -42,9 +42,9 @@ namespace KE03_INTDEV_SE_1_Base.Controllers
         [HttpPut("profile")]
         public IActionResult UpdateProfile([FromBody] CustomerProfile profile)
         {
-            CustomerDAL customerDAL = new CustomerDAL();
+            CustomerRepository customerRepository = new CustomerRepository();
 
-            bool success = customerDAL.UpdateCustomerProfile(profile);
+            bool success = customerRepository.UpdateCustomerProfile(profile);
 
             return Ok(new
             {

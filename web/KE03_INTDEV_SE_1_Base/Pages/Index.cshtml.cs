@@ -20,11 +20,11 @@ namespace KE03_INTDEV_SE_1_Base.Pages
 
         public void OnGet()
         {
-            CustomerDAL customerDAL = new CustomerDAL();
-            ProductDAL productDAL = new ProductDAL();
+            CustomerRepository customerRepository = new CustomerRepository();
+            ProductRepository productRepository = new ProductRepository();
 
-            Customers = customerDAL.GetAllCustomers();
-            Products = productDAL.GetAllProducts();
+            Customers = customerRepository.GetAllCustomers();
+            Products = productRepository.GetAllProducts();
         }
     }
 }

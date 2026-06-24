@@ -3,7 +3,7 @@ using Microsoft.Data.SqlClient;
 
 namespace DataAccessLayer.DAL
 {
-    public class OrderDAL : BaseDAL
+    public class OrderRepository : dbContext
     {
         public IEnumerable<Order> GetAllOrders()
         {

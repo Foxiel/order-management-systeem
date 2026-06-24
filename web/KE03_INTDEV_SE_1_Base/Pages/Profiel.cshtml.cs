@@ -12,9 +12,9 @@ namespace KE03_INTDEV_SE_1_Base.Pages
 
         public JsonResult OnPostLogin([FromBody] LoginRequest request)
         {
-            AccountDAL accountDAL = new AccountDAL();
+            AccountRepository accountRepository = new AccountRepository();
 
-            bool success = accountDAL.LoginByUsernameAndPassword(
+            bool success = accountRepository.LoginByUsernameAndPassword(
                 request.Username,
                 request.Password
             );
