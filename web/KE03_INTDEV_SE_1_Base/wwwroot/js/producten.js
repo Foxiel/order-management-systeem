@@ -26,11 +26,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
             localStorage.setItem(storageKey, JSON.stringify(cartItems));
 
-            this.textContent = "Toegevoegd ✓";
+            this.textContent   = "Toegevoegd";
 
             setTimeout(() => {
-                this.textContent = "Aan wagen toevoegen";
-            }, 1500);
+                this.innerHTML = `
+                    <svg class="icon-svg-index"
+                         xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="1.8"
+                              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 6h13" />
+                    </svg>
+                `;
+            }, 1500)
         });
     });
 });

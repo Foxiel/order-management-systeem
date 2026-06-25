@@ -4,8 +4,6 @@ const STORAGE_KEY = "cartItems";
 
 let cartItems = [];
 
-debugger;
-
 document.addEventListener("DOMContentLoaded", function () {
     loadCartFromStorage();
     updateCartDisplay();
