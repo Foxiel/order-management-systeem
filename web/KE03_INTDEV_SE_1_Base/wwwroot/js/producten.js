@@ -2,7 +2,6 @@
 //Aangepast door Tristan. aapassing voor local storage met winkelwagen. dit werkt nog niet
 document.addEventListener("DOMContentLoaded", function () {
     const buttons = document.querySelectorAll(".add-to-cart-btn");
-    const storageKey = "cartItems";
 
     buttons.forEach(button => {
         button.addEventListener("click", function () {
@@ -14,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 amount: 1
             };
 
-            let cartItems = JSON.parse(localStorage.getItem(storageKey)) || [];
+            let cartItems = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
 
             const existingItem = cartItems.find(item => item.id === product.id);
 
@@ -24,7 +23,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 cartItems.push(product);
             }
 
-            localStorage.setItem(storageKey, JSON.stringify(cartItems));
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(cartItems));
+
+            window.dispatchEvent(new Event("cartItemsChanged"));
 
             this.textContent   = "Toegevoegd";
 
