@@ -39,14 +39,14 @@ namespace KE03_INTDEV_SE_1_Base.Pages
         /// Deze methode haalt alle bestellingen en orderlijnen uit de database
         public void OnGet()
         {
-            // Stap 1: Maak een OrderDAL object aan voor databaseoperaties
+            // Maak een OrderDAL object aan voor databaseoperaties
             OrderRepository orderRepository = new OrderRepository();
 
-            // Stap 2: Haal ALLE bestellingen op uit de database
+            // Haal ALLE bestellingen op uit de database
             // GetAllOrders() geeft een IEnumerable terug, dus we zetten het om naar een List
             Orders = orderRepository.GetAllOrders().ToList();
 
-            // Stap 3: Voor ELKE bestelling, haal alle bijbehorende orderlijnen op
+            // Voor ELKE bestelling, haal alle bijbehorende orderlijnen op
             // Bijvoorbeeld: als bestelling 1 3 producten bevat, haal die 3 producten op
             foreach (var order in Orders)
             {

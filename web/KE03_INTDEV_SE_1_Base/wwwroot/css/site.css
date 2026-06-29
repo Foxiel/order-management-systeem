@@ -1958,3 +1958,35 @@ f {
         }
 }
 
+.order-summary-container {
+    border-top: 1px solid #ccc;
+    margin-top: 10px;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.order-summary-line {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 4px;
+}
+
+.order-summary-line.summary-spacing {
+    margin-bottom: 6px;
+}
+
+.order-summary-total {
+    font-weight: bold;
+    text-align: right;
+    font-size: 1.1rem;
+    border-top: 1px dashed #555;
+    padding-top: 4px;
+}
+
+.total-price-amount {
+    color: #00ff00;
+    margin-left: 10px;
+}

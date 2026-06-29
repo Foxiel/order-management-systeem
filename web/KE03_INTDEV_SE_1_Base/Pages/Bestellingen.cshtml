@@ -27,8 +27,7 @@
             <div class="bestellingen-card">
 
                 <div class="bestellingen-header">
-                    <h2>Bestelling #@bestelling.OrderId</h2>
-                    <p>Datum: @bestelling.OrderDate.ToString("dd-MM-yyyy")</p>
+                    <h2>@bestelling.OrderDate.ToString("dd-MM-yyyy") - Bestelnummer @bestelling.OrderId</h2>
                     <p>Status: @bestelling.OrderStatus</p>
                 </div>
 
@@ -38,13 +37,32 @@
                     {
                         <div class="row">
                             <div class="bestellingen-meta">
-                                <h3>Artikel: @product.ProductEAN</h3>
+                                <div></div>
+                                <h3>Artikel: @product.ProductNaam</h3>
                                 <p>Hoeveelheid: @product.Quantity</p>
                             </div>
 
                             <div class="bestellingen-actions">
-                                <div class="bestellingen-price">€ @(product.PricePerUnit * product.Quantity)
-                                </div>
+                                <div class="bestellingen-price">€ @((product.PricePerUnit * product.Quantity).ToString("F2"))</div>
+                            </div>
+                        </div>
+                    }
+
+                    {
+                        var productenTotaal = Model.OrderLines[bestelling.OrderId].Sum(p => p.PricePerUnit * p.Quantity);
+                        var verzendkosten = 4.99m; 
+                        var totaalPrijs = productenTotaal + verzendkosten;
+                            
+                        <div class="row order-summary-container">
+                            <div class="order-summary-line">
+                                Subtotaal: € @productenTotaal.ToString("F2")
+                            </div>
+                            <div class="order-summary-line summary-spacing">
+                                Verzendkosten: € @verzendkosten.ToString("F2")
+                            </div>
+                            <div class="order-summary-total">
+                                <span>Totaal te betalen: </span>
+                                <span class="total-price-amount">€ @totaalPrijs.ToString("F2")</span>
                             </div>
                         </div>
                     }
