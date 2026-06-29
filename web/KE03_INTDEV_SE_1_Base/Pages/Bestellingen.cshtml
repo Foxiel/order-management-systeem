@@ -29,7 +29,7 @@
                 <div class="bestellingen-header">
                     <h2>Bestelling #@bestelling.OrderId</h2>
                     <p>Datum: @bestelling.OrderDate.ToString("dd-MM-yyyy")</p>
-                    <p>Status: @bestelling.OrderStatusId</p>
+                    <p>Status: @bestelling.OrderStatus</p>
                 </div>
 
                 @if (Model.OrderLines != null && Model.OrderLines.ContainsKey(bestelling.OrderId))

@@ -51,7 +51,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
             {
                 CustomerId = 500,
                 OrderDate = DateTime.Now,
-                OrderStatusId = 0,
+                OrderStatus = "Bestelling ontvangen",
                 ShippingCosts = 4.99m
             };
 

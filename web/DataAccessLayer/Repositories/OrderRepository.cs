@@ -252,7 +252,7 @@ namespace DataAccessLayer.DAL
 
             cmd.Parameters.AddWithValue("@KlantId", order.CustomerId);
             cmd.Parameters.AddWithValue("@OrderDatum", order.OrderDate);
-            cmd.Parameters.AddWithValue("@order_status", order.OrderStatusId);
+            cmd.Parameters.AddWithValue("@order_status", order.OrderStatus);
 
             conn.Open();
 
