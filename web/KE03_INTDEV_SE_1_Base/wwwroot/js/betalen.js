@@ -1,7 +1,6 @@
 ﻿// gemaakt door Jesse
 
 const PAYMENT_SHIPPING_COST = 4.99;
-const PAYMENT_STORAGE_KEY = "cartItems";
 
 document.addEventListener("DOMContentLoaded", function () {
     const savedCart = localStorage.getItem(PAYMENT_STORAGE_KEY);

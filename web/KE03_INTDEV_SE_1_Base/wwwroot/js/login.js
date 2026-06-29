@@ -9,6 +9,7 @@
     const loggedInUser = document.getElementById("loggedInUser");
     const logoutBtn = document.getElementById("logoutBtn");
     const ordersBtnContainer = document.getElementById("ordersBtnContainer");
+    const retourBtn = document.getElementById("retourBtn");
 
     // Controle of alles bestaat
     if (
@@ -40,6 +41,7 @@
             loggedInUser.classList.remove("d-none");
             logoutBtn.classList.remove("d-none");
             ordersBtnContainer.classList.remove("d-none");
+            retourBtn.classList.remove("d-none");
 
             loggedInUser.textContent =
                 `Ingelogd als: ${usernameStored}`;
@@ -54,6 +56,7 @@
             loggedInUser.classList.add("d-none");
             logoutBtn.classList.add("d-none");
             ordersBtnContainer.classList.add("d-none");
+            retourBtn.classList.add("d-none");
 
             loggedInUser.textContent = "";
 

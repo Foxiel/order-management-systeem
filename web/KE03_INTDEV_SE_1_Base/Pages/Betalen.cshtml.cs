@@ -77,6 +77,8 @@ namespace KE03_INTDEV_SE_1_Base.Pages
                 };
 
                 orderRepository.AddOrderLineByEan(orderLine);
+                
+                // empty localstorage
             }
 
             return RedirectToPage("/NaBetalen");

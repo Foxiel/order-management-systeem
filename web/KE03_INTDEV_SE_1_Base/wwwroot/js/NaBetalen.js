@@ -27,4 +27,6 @@
     });
 
     localStorage.removeItem("cartItems");
+    
+    window.dispatchEvent(new Event("cartItemsChanged"));    
 });

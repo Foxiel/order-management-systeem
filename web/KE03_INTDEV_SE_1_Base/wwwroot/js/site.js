@@ -92,3 +92,7 @@ window.addEventListener("storage", (e) => {
 });
 
 window.addEventListener("cartItemsChanged", updateCartBadge);
+
+function onRetourClick() {
+    alert("Deze functie is nog niet geïmplementeerd.")
+}
