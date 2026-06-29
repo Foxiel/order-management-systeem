@@ -1,0 +1,52 @@
+@page
+@* @model NaBetalenModel *@
+@{
+    ViewData["Title"] = "NaBetalen";
+}
+
+<div class="matrix-page">
+
+    <section class="payment-done-section">
+
+        <div class="section-header">
+            <h3>BEDANKT VOOR JE BESTELLING</h3>
+        </div>
+
+        <div class="payment-done-box">
+
+            <div class="order-info">
+                <div class="order-info-card">
+                    <span>verwachte bezorgdatum</span>
+                    <strong>29-2-1999</strong>
+                </div>
+
+                <div class="order-info-card">
+                    <span>bestelnummer</span>
+                    <strong>0</strong>
+                </div>
+
+                <div class="order-info-card">
+                    <span>adres</span>
+                    <strong>Hoofdstraat 1 - 1234AB Maastricht</strong>
+                </div>
+            </div>
+
+            <h3 class="ordered-title">UW BESTELLING BEVAT DEZE PRODUCTEN</h3>
+
+            <div id="ordered-products" class="ordered-products">
+            </div>
+
+            <a asp-page="/Index" class="back-shop-btn">
+                TERUG NAAR DE WEBSHOP
+            </a>
+
+        </div>
+
+    </section>
+
+</div>
+
+@section Scripts
+{
+    <script src="~/js/nabetalen.js"></script>
+}
