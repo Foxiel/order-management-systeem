@@ -8,5 +8,5 @@ public class OrderLine
     public string ProductEAN { get; set; } = string.Empty;
     public int Quantity { get; set; }
     public decimal PricePerUnit { get; set; }
-    public int ProductId { get; internal set; }
+    public int ProductId { get; set; }
 }

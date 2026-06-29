@@ -2,6 +2,7 @@ using DataAccessLayer.DAL;
 using DataAccessLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore.Query;
 using System.Text.Json;
 
 namespace KE03_INTDEV_SE_1_Base.Pages
@@ -38,7 +39,13 @@ namespace KE03_INTDEV_SE_1_Base.Pages
 
         public IActionResult OnPost()
         {
-            List<CartItemDto> cartItems = JsonSerializer.Deserialize<List<CartItemDto>>(CartJson) ?? new();
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+            List<CartItemDto> cartItems =
+                JsonSerializer.Deserialize<List<CartItemDto>>(CartJson, options) ?? new();
 
             if (cartItems.Count == 0)
             {
@@ -59,13 +66,17 @@ namespace KE03_INTDEV_SE_1_Base.Pages
 
             foreach (var item in cartItems)
             {
-                orderRepository.AddOrderLineByEan(new OrderLine
+
+
+                OrderLine orderLine = new OrderLine
                 {
                     OrderId = newOrderId,
                     ProductEAN = item.Id,
                     Quantity = item.Amount,
                     PricePerUnit = item.Price
-                });
+                };
+
+                orderRepository.AddOrderLineByEan(orderLine);
             }
 
             return RedirectToPage("/NaBetalen");
