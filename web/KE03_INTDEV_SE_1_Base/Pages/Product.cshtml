@@ -1,24 +1,42 @@
 @page
 @model KE03_INTDEV_SE_1_Base.Pages.ProductModel
-
+@*
+    Product.cshtml
+    Toont de detailpagina van één product.
+    Gebruikt ProductModel om productgegevens uit de database weer te geven.
+    Via JavaScript kan de gebruiker een aantal kiezen en het product aan de winkelwagen toevoegen.
+*@
 @{
+    // Haal het huidige product op uit het PageModel.
     var p = Model.Product;
+
+    // Zet de titel van de pagina. Bestaat het product niet, dan wordt een foutmelding als titel gebruikt.
     ViewData["Title"] = p != null ? p.ProductName : "Product niet gevonden";
 }
 
 <div class="product-page">
+
+    @* Controleer of het product bestaat.
+       Als het product of de EAN leeg is, wordt een melding weergegeven. *@
     @if (p == null || string.IsNullOrEmpty(p.ProductEAN))
     {
         <div class="product-panel product-not-found">
-            <div class="alert alert-warning mb-0">Product niet gevonden.</div>
+            <div class="alert alert-warning mb-0">
+                Product niet gevonden.
+            </div>
         </div>
     }
     else
     {
         <div class="product-panel">
             <div class="row g-4 align-items-start">
+
+                @* Linkerkant van de pagina: productafbeelding *@
                 <div class="col-lg-6">
                     <div class="product-image-card">
+
+                        @* Tijdelijke placeholder-afbeelding.
+                           Later kan hier de afbeelding uit de database komen. *@
                         <img src="https://cataas.com/cat?width=600&height=800"
                              alt="@p.ProductName"
                              class="img-fluid"
@@ -26,34 +44,74 @@
                     </div>
                 </div>
 
+                @* Rechterkant van de pagina: alle productinformatie *@
                 <div class="col-lg-6">
                     <div class="product-info">
+
                         <p class="product-kicker">Product detail</p>
+
+                        @* Naam van het product *@
                         <h1 class="product-title">@p.ProductName</h1>
 
+                        @* Toon het EAN-nummer van het product *@
                         <p class="product-meta">
                             EAN: <strong>@p.ProductEAN</strong>
                         </p>
 
+                        @* Prijs en huidige voorraad *@
                         <div class="product-price-row">
-                            <span class="product-price">€ @p.ProductPrice.ToString("F2")</span>
-                            <span class="product-stock">Voorraad: @p.ProductStock</span>
+                            <span class="product-price">
+                                € @p.ProductPrice.ToString("F2")
+                            </span>
+
+                            <span class="product-stock">
+                                Voorraad: @p.ProductStock
+                            </span>
                         </div>
 
+                        @* Blok waarmee de gebruiker het gewenste aantal kiest *@
                         <div class="product-quantity-block">
-                            <label for="qty" class="product-label">Aantal</label>
+
+                            <label for="qty" class="product-label">
+                                Aantal
+                            </label>
+
                             <div class="input-group product-qty-group">
-                                <button class="qty-btn" type="button" id="decreaseQty">−</button>
-                                <input type="text" id="qty" class="qty-input" value="1" readonly aria-label="Aantal" />
-                                <button class="qty-btn" type="button" id="increaseQty">+</button>
+
+                                @* Verlaag het aantal via JavaScript *@
+                                <button class="qty-btn"
+                                        type="button"
+                                        id="decreaseQty">
+                                    −
+                                </button>
+
+                                @* Het gekozen aantal.
+                                   Is readonly zodat alleen de knoppen het kunnen aanpassen. *@
+                                <input type="text"
+                                       id="qty"
+                                       class="qty-input"
+                                       value="1"
+                                       readonly
+                                       aria-label="Aantal" />
+
+                                @* Verhoog het aantal via JavaScript *@
+                                <button class="qty-btn"
+                                        type="button"
+                                        id="increaseQty">
+                                    +
+                                </button>
                             </div>
                         </div>
 
+                        @* Knop om het product aan de winkelwagen toe te voegen.
+                           De data-* attributen worden door winkelwagen.js gebruikt. *@
                         <button type="button"
                                 class="product-modal-add-btn add-to-cart-btn"
                                 data-product-id="@p.ProductEAN"
                                 data-product-name="@p.ProductName"
                                 data-product-price="@p.ProductPrice.ToString(System.Globalization.CultureInfo.InvariantCulture)">
+
+                            @* Winkelwagen-icoon (SVG) *@
                             <svg class="icon-svg-index"
                                  xmlns="http://www.w3.org/2000/svg"
                                  viewBox="0 0 24 24"
@@ -64,30 +122,55 @@
                                       stroke-width="1.8"
                                       d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 6h13" />
                             </svg>
+
                             <span>In winkelwagen</span>
                         </button>
 
                         <hr class="product-divider" />
 
-                        <h5 class="product-section-title">Beschrijving</h5>
+                        @* Algemene productinformatie *@
+                        <h5 class="product-section-title">
+                            Beschrijving
+                        </h5>
+
                         <dl class="row product-spec-list">
+
                             <dt class="col-sm-4">Gewicht</dt>
-                            <dd class="col-sm-8">@p.ProductWeightKg.ToString("0.##") kg</dd>
+                            <dd class="col-sm-8">
+                                @p.ProductWeightKg.ToString("0.##") kg
+                            </dd>
 
                             <dt class="col-sm-4">Garantie</dt>
-                            <dd class="col-sm-8">@p.ProductWarranty</dd>
+                            <dd class="col-sm-8">
+                                @p.ProductWarranty
+                            </dd>
 
+                            @* Momenteel wordt alleen het ID weergegeven.
+                               Later zou hier de naam van de fabrikant kunnen komen. *@
                             <dt class="col-sm-4">Fabrikant</dt>
-                            <dd class="col-sm-8">@p.ManufacturerId</dd>
+                            <dd class="col-sm-8">
+                                @p.ManufacturerId
+                            </dd>
 
+                            @* Ook hier wordt nu alleen het ID getoond. *@
                             <dt class="col-sm-4">Subcategorie</dt>
-                            <dd class="col-sm-8">@p.SubcategoryId</dd>
+                            <dd class="col-sm-8">
+                                @p.SubcategoryId
+                            </dd>
                         </dl>
 
-                        <h5 class="product-section-title">Specificaties</h5>
-                        <p class="product-spec-text">@p.ProductSpecification</p>
+                        @* Specificaties of beschrijving van het product *@
+                        <h5 class="product-section-title">
+                            Specificaties
+                        </h5>
+
+                        <p class="product-spec-text">
+                            @p.ProductSpecification
+                        </p>
+
                     </div>
                 </div>
+
             </div>
         </div>
     }
