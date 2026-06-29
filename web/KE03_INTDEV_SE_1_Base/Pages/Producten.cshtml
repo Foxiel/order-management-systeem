@@ -21,8 +21,8 @@
                 foreach (var product in Model.Products)
                 {
                     var imageUrl = !string.IsNullOrWhiteSpace(product.ImageUrl)
-                    ? product.ImageUrl
-                    : $"https://cataas.com/cat?width=400&height=300";
+                        ? product.ImageUrl
+                        : $"https://cataas.com/cat?width=400&height=300&random={product.ProductEAN}";
 
                     <div class="product-card">
 
@@ -46,8 +46,11 @@
                                 </div>
 
                                 <button type="button"
-                                        class="product-modal-add-btn"
-                                        onclick="addToCart(this, '@product.ProductEAN', '@product.ProductName', @product.ProductPrice.ToString(System.Globalization.CultureInfo.InvariantCulture), '@imageUrl')">
+                                        class="product-modal-add-btn add-to-cart-btn"
+                                        data-product-id="@product.ProductEAN"
+                                        data-product-name="@product.ProductName"
+                                        data-product-price="@product.ProductPrice.ToString(System.Globalization.CultureInfo.InvariantCulture)"
+                                        data-product-image="@imageUrl">
                                     <svg class="icon-svg-index"
                                          xmlns="http://www.w3.org/2000/svg"
                                          viewBox="0 0 24 24"
@@ -84,6 +87,6 @@
 </div>
 
 @section Scripts {
-    <script src="~/js/producten.js"></script>;
+    <script src="~/js/producten.js"></script>
     <script src="~/js/winkelwagen.js"></script>
 }

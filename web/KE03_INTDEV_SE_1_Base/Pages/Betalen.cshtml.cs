@@ -22,11 +22,11 @@ namespace KE03_INTDEV_SE_1_Base.Pages
 
         public void OnGet()
         {
-            CustomerDAL customerDAL = new CustomerDAL();
+            CustomerRepository customerRepository = new CustomerRepository();
 
             int klantId = 500; // later uit session/login halen
 
-            CustomerProfile? klant = customerDAL.GetCustomerProfileById(klantId);
+            CustomerProfile? klant = customerRepository.GetCustomerProfileById(klantId);
 
             if (klant != null)
             {
@@ -45,7 +45,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
                 return Page();
             }
 
-            OrderDAL orderDAL = new OrderDAL();
+            OrderRepository orderRepository = new OrderRepository();
 
             Order order = new Order
             {
@@ -55,11 +55,11 @@ namespace KE03_INTDEV_SE_1_Base.Pages
                 ShippingCosts = 4.99m
             };
 
-            int newOrderId = orderDAL.AddOrderAndReturnId(order);
+            int newOrderId = orderRepository.AddOrderAndReturnId(order);
 
             foreach (var item in cartItems)
             {
-                orderDAL.AddOrderLineByEan(new OrderLine
+                orderRepository.AddOrderLineByEan(new OrderLine
                 {
                     OrderId = newOrderId,
                     ProductEAN = item.Id,

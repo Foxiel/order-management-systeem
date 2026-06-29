@@ -3,7 +3,7 @@ using Microsoft.Data.SqlClient;
 
 namespace DataAccessLayer.DAL
 {
-    public class CategoryDAL : BaseDAL
+    public class CategoryDAL : dbContext
     {
         public List<Category> GetAllCategories()
         {

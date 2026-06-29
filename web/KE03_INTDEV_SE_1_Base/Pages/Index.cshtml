@@ -74,7 +74,7 @@
 
                     <a asp-page="/Categorieën" asp-route-category="licht" class="category-card">
                         <div class="category-image">
-                            <img src="https://aleatori.cat/random" alt="Licht">
+                            <img src="https://aleatori.cat/random?x=1" alt="Licht">
                         </div>
 
                         <div class="category-content">
@@ -85,7 +85,7 @@
 
                     <a asp-page="/Categorieën" asp-route-category="beveiliging" class="category-card">
                         <div class="category-image">
-                            <img src="https://aleatori.cat/random" alt="Beveiliging">
+                            <img src="https://aleatori.cat/random?x=2" alt="Beveiliging">
                         </div>
 
                         <div class="category-content">
@@ -96,7 +96,7 @@
 
                     <a asp-page="/Categorieën" asp-route-category="batterijen" class="category-card">
                         <div class="category-image">
-                            <img src="https://aleatori.cat/random" alt="Batterijen">
+                            <img src="https://aleatori.cat/random?x=3" alt="Batterijen">
                         </div>
 
                         <div class="category-content">
@@ -107,7 +107,7 @@
 
                     <a asp-page="/Categorieën" asp-route-category="auto-onderdelen" class="category-card">
                         <div class="category-image">
-                            <img src="https://aleatori.cat/random" alt="Auto onderdelen">
+                            <img src="https://aleatori.cat/random?x=4" alt="Auto onderdelen">
                         </div>
 
                         <div class="category-content">
@@ -165,8 +165,11 @@
                                 </div>
                                 
                                 <button type="button"
-                                        class="product-modal-add-btn"
-                                        onclick="addToCart(this, '@product.ProductEAN', '@product.ProductName', @product.ProductPrice.ToString(System.Globalization.CultureInfo.InvariantCulture), '@imageUrl')">
+                                        class="product-modal-add-btn add-to-cart-btn"
+                                        data-product-id="@product.ProductEAN"
+                                        data-product-name="@product.ProductName"
+                                        data-product-price="@product.ProductPrice.ToString(System.Globalization.CultureInfo.InvariantCulture)"
+                                        data-product-image="@imageUrl">
                                     <svg class="icon-svg-index"
                                          xmlns="http://www.w3.org/2000/svg"
                                          viewBox="0 0 24 24"
@@ -177,7 +180,8 @@
                                               stroke-width="1.8"
                                               d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 6h13" />
                                     </svg>
-								</button>
+                                </button>
+
                                 
 
                                 <a class="product-btn" asp-page="/Producten" asp-route-id="@product.ProductEAN">

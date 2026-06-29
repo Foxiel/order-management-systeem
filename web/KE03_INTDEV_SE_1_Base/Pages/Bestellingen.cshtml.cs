@@ -40,11 +40,11 @@ namespace KE03_INTDEV_SE_1_Base.Pages
         public void OnGet()
         {
             // Stap 1: Maak een OrderDAL object aan voor databaseoperaties
-            OrderDAL orderDAL = new OrderDAL();
+            OrderRepository orderRepository = new OrderRepository();
 
             // Stap 2: Haal ALLE bestellingen op uit de database
             // GetAllOrders() geeft een IEnumerable terug, dus we zetten het om naar een List
-            Orders = orderDAL.GetAllOrders().ToList();
+            Orders = orderRepository.GetAllOrders().ToList();
 
             // Stap 3: Voor ELKE bestelling, haal alle bijbehorende orderlijnen op
             // Bijvoorbeeld: als bestelling 1 3 producten bevat, haal die 3 producten op
@@ -52,7 +52,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
             {
                 // GetOrderLinesByOrderId() haalt alle producten voor deze bestelling op
                 // We slaan het resultaat op in de Dictionary met de OrderId als key
-                OrderLines[order.OrderId] = orderDAL.GetOrderLinesByOrderId(order.OrderId).ToList();
+                OrderLines[order.OrderId] = orderRepository.GetOrderLinesByOrderId(order.OrderId).ToList();
             }
         }
     }

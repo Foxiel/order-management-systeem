@@ -3,7 +3,7 @@ using Microsoft.Data.SqlClient;
 
 namespace DataAccessLayer.DAL
 {
-    public class CustomerDAL : BaseDAL
+    public class CustomerRepository : dbContext
     {
         public List<Customer> GetAllCustomers()
         {

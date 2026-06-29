@@ -3,7 +3,7 @@ using Microsoft.Data.SqlClient;
 
 namespace DataAccessLayer.DAL
 {
-    public class AccountDAL : BaseDAL
+    public class AccountRepository : dbContext
     {
         public Account? GetByUsername(string username)
         {
