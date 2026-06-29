@@ -174,6 +174,7 @@ namespace DataAccessLayer.DAL
                     OrderId = Convert.ToInt32(reader["bestelling_id"]),
                     ProductId = Convert.ToInt32(reader["product_id"]),
                     ProductEAN = reader["ean"].ToString()!,
+                    ProductNaam = reader["naam"].ToString()!,
                     Quantity = Convert.ToInt32(reader["aantal"]),
                     PricePerUnit = Convert.ToDecimal(reader["prijs"])
                 });

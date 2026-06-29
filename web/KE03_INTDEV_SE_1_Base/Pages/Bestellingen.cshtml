@@ -27,8 +27,7 @@
             <div class="bestellingen-card">
 
                 <div class="bestellingen-header">
-                    <h2>Bestelling #@bestelling.OrderId</h2>
-                    <p>Datum: @bestelling.OrderDate.ToString("dd-MM-yyyy")</p>
+                    <h2>@bestelling.OrderDate.ToString("dd-MM-yyyy") - Bestelnummer @bestelling.OrderId</h2>
                     <p>Status: @bestelling.OrderStatus</p>
                 </div>
 
@@ -38,13 +37,35 @@
                     {
                         <div class="row">
                             <div class="bestellingen-meta">
-                                <h3>Artikel: @product.ProductEAN</h3>
-                                <p>Hoeveelheid: @product.Quantity</p>
-                            </div>
-
-                            <div class="bestellingen-actions">
-                                <div class="bestellingen-price">€ @(product.PricePerUnit * product.Quantity)
+                                <div class="bestellingen-product-image">
+                                    <img src="https://cataas.com/cat?width=100&height=100&random=@product.ProductEAN" alt="Product foto" />
                                 </div>
+        
+                                @* Deze nieuwe container zorgt ervoor dat de tekst onder elkaar stroomt *@
+                                <div class="bestellingen-product-info">
+                                    <h3>@product.ProductNaam</h3>
+                                    <p class="product-qty">Aantal: @product.Quantity</p>
+                                    <p class="product-subprice">Prijs: € @((product.PricePerUnit * product.Quantity).ToString("F2"))</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    {
+                        var productenTotaal = Model.OrderLines[bestelling.OrderId].Sum(p => p.PricePerUnit * p.Quantity);
+                        var verzendkosten = 4.99m; 
+                        var totaalPrijs = productenTotaal + verzendkosten;
+                            
+                        <div class="row order-summary-container">
+                            <div class="order-summary-line">
+                                Subtotaal: € @productenTotaal.ToString("F2")
+                            </div>
+                            <div class="order-summary-line summary-spacing">
+                                Verzendkosten: € @verzendkosten.ToString("F2")
+                            </div>
+                            <div class="order-summary-total">
+                                <span>Totaal te betalen: </span>
+                                <span class="total-price-amount">€ @totaalPrijs.ToString("F2")</span>
                             </div>
                         </div>
                     }

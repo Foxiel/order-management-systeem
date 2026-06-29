@@ -1958,3 +1958,86 @@ f {
         }
 }
 
+.order-summary-container {
+    border-top: 1px solid #ccc;
+    margin-top: 10px;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.order-summary-line {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 4px;
+}
+
+.order-summary-line.summary-spacing {
+    margin-bottom: 6px;
+}
+
+.order-summary-total {
+    font-weight: bold;
+    text-align: right;
+    font-size: 1.1rem;
+    border-top: 1px dashed #555;
+    padding-top: 4px;
+}
+
+.total-price-amount {
+    color: #00ff00;
+    margin-left: 10px;
+}
+
+.bestellingen-meta {
+    display: flex;
+    align-items: center;
+    gap: 15px; 
+}
+
+.bestellingen-product-image img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #444;
+}
+
+.bestellingen-product-info h3 {
+    margin: 0 0 5px 0;
+}
+
+.bestellingen-product-info p {
+    margin: 0;
+}
+
+.bestellingen-meta {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.bestellingen-product-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.bestellingen-product-info h3 {
+    margin: 0 0 4px 0;
+    font-size: 1.1rem;
+}
+
+.bestellingen-product-info p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+.product-subprice {
+    margin-top: 2px !important;
+    font-weight: bold;
+    color: #fff;
+}
