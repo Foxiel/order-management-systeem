@@ -37,13 +37,16 @@
                     {
                         <div class="row">
                             <div class="bestellingen-meta">
-                                <div></div>
-                                <h3>Artikel: @product.ProductNaam</h3>
-                                <p>Hoeveelheid: @product.Quantity</p>
-                            </div>
-
-                            <div class="bestellingen-actions">
-                                <div class="bestellingen-price">€ @((product.PricePerUnit * product.Quantity).ToString("F2"))</div>
+                                <div class="bestellingen-product-image">
+                                    <img src="https://cataas.com/cat?width=100&height=100&random=@product.ProductEAN" alt="Product foto" />
+                                </div>
+        
+                                @* Deze nieuwe container zorgt ervoor dat de tekst onder elkaar stroomt *@
+                                <div class="bestellingen-product-info">
+                                    <h3>@product.ProductNaam</h3>
+                                    <p class="product-qty">Aantal: @product.Quantity</p>
+                                    <p class="product-subprice">Prijs: € @((product.PricePerUnit * product.Quantity).ToString("F2"))</p>
+                                </div>
                             </div>
                         </div>
                     }

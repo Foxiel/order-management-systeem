@@ -1990,3 +1990,54 @@ f {
     color: #00ff00;
     margin-left: 10px;
 }
+
+.bestellingen-meta {
+    display: flex;
+    align-items: center;
+    gap: 15px; 
+}
+
+.bestellingen-product-image img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #444;
+}
+
+.bestellingen-product-info h3 {
+    margin: 0 0 5px 0;
+}
+
+.bestellingen-product-info p {
+    margin: 0;
+}
+
+.bestellingen-meta {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.bestellingen-product-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.bestellingen-product-info h3 {
+    margin: 0 0 4px 0;
+    font-size: 1.1rem;
+}
+
+.bestellingen-product-info p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+.product-subprice {
+    margin-top: 2px !important;
+    font-weight: bold;
+    color: #fff;
+}
