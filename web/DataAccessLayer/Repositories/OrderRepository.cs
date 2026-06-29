@@ -16,7 +16,7 @@ namespace DataAccessLayer.DAL
                     bestelling_id,
                     klant_id,
                     order_datum,
-                    order_status
+                    order_status 
                 FROM Bestelling
                 ORDER BY order_datum DESC";
 
