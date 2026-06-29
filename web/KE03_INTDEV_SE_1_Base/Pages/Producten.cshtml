@@ -1,84 +1,172 @@
+@*
+    Producten.cshtml
+
+    Deze pagina toont een overzicht van alle beschikbare producten.
+    De producten worden opgehaald vanuit het ProductenModel en weergegeven
+    als productkaarten. Vanuit deze pagina kan een gebruiker een product
+    bekijken of direct toevoegen aan de winkelwagen.
+*@
+
 @page
 @model KE03_INTDEV_SE_1_Base.Pages.ProductenModel
+
 @{
     ViewData["Title"] = "Producten";
 }
 
 <div class="matrix-page">
-    <!-- Gemaakt door Fabian -->
-    <!-- Aangepast door Tristan. Aanpassing Hardcoded producten er uitgehaalt -->
-    @* aangepast door Jesse. winkelwagen icon knop en bekijk knop toegevoegt *@
+
     <section class="products-section">
 
+        <!-- Titel -->
         <div class="section-header">
-            <h3> PRODUCTEN</h3>
+            <h3>PRODUCTEN</h3>
         </div>
 
-        <div class="products-grid">
+        <!-- Sidebar + Producten -->
+        <div class="products-layout">
 
-            @if (Model.Products.Any())
-            {
-                foreach (var product in Model.Products)
+            <!-- FILTERS -->
+            <aside class="products-filter-sidebar">
+
+                <form method="get" class="product-filter-form">
+
+                    <h4>Filters</h4>
+
+                    <div class="filter-group">
+
+                        <label>Zoeken</label>
+
+                        <input type="text"
+                               name="Search"
+                               value="@Model.Search"
+                               placeholder="Product zoeken..."
+                               class="filter-input" />
+
+                    </div>
+
+                    <div class="filter-group">
+
+                        <label>Sorteren</label>
+
+                        <select name="SortBy" class="filter-select">
+                            <option value="">Standaard</option>
+                            <option value="price-low" selected="@(Model.SortBy == "price-low")">Prijs laag → hoog</option>
+                            <option value="price-high" selected="@(Model.SortBy == "price-high")">Prijs hoog → laag</option>
+                            <option value="az" selected="@(Model.SortBy == "az")">Naam A → Z</option>
+                            <option value="za" selected="@(Model.SortBy == "za")">Naam Z → A</option>
+                            <option value="stock" selected="@(Model.SortBy == "stock")">Meeste voorraad</option>
+                        </select>
+
+                    </div>
+
+                    <div class="filter-group">
+
+                        <label>Fabrikant</label>
+
+                        @foreach (var manufacturer in Model.Manufacturers)
+                        {
+                            <label class="filter-checkbox">
+
+                                <input type="checkbox"
+                                       name="ManufacturerIds"
+                                       value="@manufacturer.ManufacturerId"
+                                       checked="@Model.ManufacturerIds.Contains(manufacturer.ManufacturerId)" />
+
+                                <span>@manufacturer.ManufacturerName</span>
+
+                            </label>
+                        }
+
+                    </div>
+
+                    <button type="submit"
+                            class="product-btn filter-button">
+                        Filters toepassen
+                    </button>
+
+                    <a asp-page="/Producten"
+                       class="product-btn filter-reset-button">
+                        Reset filters
+                    </a>
+
+                </form>
+
+            </aside>
+
+            <!-- PRODUCTEN -->
+            <div class="products-grid">
+
+                @if (Model.Products.Any())
                 {
-                    var imageUrl = !string.IsNullOrWhiteSpace(product.ImageUrl)
-                        ? product.ImageUrl
-                        : $"https://cataas.com/cat?width=400&height=300&random={product.ProductEAN}";
+                    foreach (var product in Model.Products)
+                    {
+                        var imageUrl = !string.IsNullOrWhiteSpace(product.ImageUrl)
+                            ? product.ImageUrl
+                            : $"https://cataas.com/cat?width=400&height=300&random={product.ProductEAN}";
 
-                    <div class="product-card">
+                        <div class="product-card">
 
-                        <div class="product-image">
-                            <img src="@imageUrl"
-                                 alt="@product.ProductName" />
-                        </div>
+                            <div class="product-image">
 
-                        <div class="product-content">
+                                <img src="@imageUrl"
+                                     alt="@product.ProductName" />
 
-                            <h3>@product.ProductName</h3>
+                            </div>
 
-                            <p>
-                                @product.ProductDescription
-                            </p>
+                            <div class="product-content">
 
-                            <div class="product-bottom">
+                                <h3>@product.ProductName</h3>
 
-                                <div class="product-price">
-                                    € @product.ProductPrice.ToString("F2")
+                                <p>
+                                    @product.ProductDescription
+                                </p>
+
+                                <div class="product-bottom">
+
+                                    <div class="product-price">
+                                        € @product.ProductPrice.ToString("F2")
+                                    </div>
+
+                                    <button type="button"
+                                            class="product-modal-add-btn add-to-cart-btn"
+                                            data-product-id="@product.ProductEAN"
+                                            data-product-name="@product.ProductName"
+                                            data-product-price="@product.ProductPrice.ToString(System.Globalization.CultureInfo.InvariantCulture)"
+                                            data-product-image="@imageUrl">
+
+                                        <svg class="icon-svg-index"
+                                             xmlns="http://www.w3.org/2000/svg"
+                                             viewBox="0 0 24 24"
+                                             fill="none"
+                                             stroke="currentColor">
+                                            <path stroke-linecap="round"
+                                                  stroke-linejoin="round"
+                                                  stroke-width="1.8"
+                                                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 6h13" />
+                                        </svg>
+
+                                    </button>
+
+                                    <a class="product-btn"
+                                       asp-page="/Product"
+                                       asp-route-id="@product.ProductEAN">
+                                        BEKIJK
+                                    </a>
+
                                 </div>
-
-                                <button type="button"
-                                        class="product-modal-add-btn add-to-cart-btn"
-                                        data-product-id="@product.ProductEAN"
-                                        data-product-name="@product.ProductName"
-                                        data-product-price="@product.ProductPrice.ToString(System.Globalization.CultureInfo.InvariantCulture)"
-                                        data-product-image="@imageUrl">
-                                    <svg class="icon-svg-index"
-                                         xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 24 24"
-                                         fill="none"
-                                         stroke="currentColor">
-                                        <path stroke-linecap="round"
-                                              stroke-linejoin="round"
-                                              stroke-width="1.8"
-                                              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 6h13" />
-                                    </svg>
-                                </button>
-
-                                
-                                <a class="product-btn" asp-page="/Product" asp-route-id="@product.ProductEAN">
-                                    BEKIJK
-                                </a>
 
                             </div>
 
                         </div>
-
-                    </div>
+                    }
                 }
-            }
-            else
-            {
-                <p>Er zijn geen producten gevonden.</p>
-            }
+                else
+                {
+                    <p>Er zijn geen producten gevonden.</p>
+                }
+
+            </div>
 
         </div>
 
@@ -86,7 +174,8 @@
 
 </div>
 
-@section Scripts {
+@section Scripts
+{
     <script src="~/js/producten.js"></script>
     <script src="~/js/winkelwagen.js"></script>
 }

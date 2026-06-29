@@ -4,6 +4,6 @@ namespace DataAccessLayer.Models;
 
 public class Manufacturer
 {
-    public string ManufacturerId { get; set; } = string.Empty;
+    public int ManufacturerId { get; set; }
     public string ManufacturerName { get; set; } = string.Empty;
 }
