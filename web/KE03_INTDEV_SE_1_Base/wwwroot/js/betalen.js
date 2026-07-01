@@ -1,6 +1,7 @@
 ﻿// gemaakt door Jesse
 
 const PAYMENT_SHIPPING_COST = 4.99;
+const PAYMENT_STORAGE_KEY = "cartItems";
 
 document.addEventListener("DOMContentLoaded", function () {
     const savedCart = localStorage.getItem(PAYMENT_STORAGE_KEY);
@@ -20,6 +21,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const paymentSubtotal = document.getElementById("paymentSubtotal");
     const paymentShipping = document.getElementById("paymentShipping");
     const paymentTotal = document.getElementById("paymentTotal");
+    const paymentForm = document.getElementById("paymentForm");
+    const cartJsonInput = document.getElementById("cartJsonInput");
+
+    if (paymentForm && cartJsonInput) {
+        paymentForm.addEventListener("submit", function () {
+            cartJsonInput.value = localStorage.getItem(PAYMENT_STORAGE_KEY) || "[]";
+        });
+    }
 
     if (!paymentProducts) {
         return;
@@ -66,22 +75,4 @@ document.addEventListener("DOMContentLoaded", function () {
     paymentSubtotal.textContent = `€${subtotal.toFixed(2)}`;
     paymentShipping.textContent = `€${shipping.toFixed(2)}`;
     paymentTotal.textContent = `€${total.toFixed(2)}`;
-
-    const paymentForm = document.getElementById("paymentForm");
-    const cartJsonInput = document.getElementById("cartJsonInput");
-
-    if (paymentForm && cartJsonInput) {
-        paymentForm.addEventListener("submit", function () {
-
-            const cart = localStorage.getItem("cartItems");
-
-            if (cart) {
-                cartJsonInput.value = cart;
-            }
-            else {
-                cartJsonInput.value = "[]";
-            }
-
-        });
-    }
 });

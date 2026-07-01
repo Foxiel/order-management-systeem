@@ -18,7 +18,7 @@ namespace DataAccessLayer.DAL
                     order_datum,
                     order_status 
                 FROM Bestelling
-                ORDER BY order_datum DESC";
+                ORDER BY order_datum DESC, bestelling_id DESC";
 
             SqlCommand cmd = new(query, conn);
 
