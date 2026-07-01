@@ -13,10 +13,12 @@ public class Product
     public decimal ProductWeightKg { get; set; }
     public string ProductWarranty { get; set; } = string.Empty;
     public int ManufacturerId { get; set; }
+    public string Manufacturer { get; set; }
     public int SubcategoryId { get; set; }
     public string? ImageUrl { get; set; }
     public int huidige_voorraad { get; set; }
     public int minimum_voorraad { get; set; }
     public string? status { get; set; }
     public int ProductId { get; internal set; }
+    public string Specification { get; set; } = string.Empty;
 }

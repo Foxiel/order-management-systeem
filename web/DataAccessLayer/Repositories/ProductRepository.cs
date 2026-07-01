@@ -14,19 +14,22 @@ namespace DataAccessLayer.DAL
 
             string query = @"
                 SELECT
-                    product_id,
-                    ean,
-                    leverancier_id,
-                    locatie_id,
-                    naam,
-                    beschrijving,
-                    prijs,
-                    gewicht,
-                    garantie,
-                    huidige_voorraad,
-                    minimum_voorraad,
-                    status
-                FROM Product";
+                    p.product_id,
+                    p.ean,
+                    l.leverancier_id AS leverancier_id,
+                    l.naam AS leverancier,
+                    p.locatie_id,
+                    p.naam,
+                    p.beschrijving,
+                    p.prijs,
+                    p.gewicht,
+                    p.garantie,
+                    p.huidige_voorraad,
+                    p.minimum_voorraad,
+                    p.status
+                FROM Product p
+                JOIN Leverancier l
+                    ON p.leverancier_id = l.leverancier_id";
 
             SqlCommand cmd = new(query, conn);
 
@@ -46,6 +49,7 @@ namespace DataAccessLayer.DAL
                     ProductWeightKg = Convert.ToDecimal(reader["gewicht"]),
                     ProductWarranty = reader["garantie"].ToString()!,
                     ManufacturerId = Convert.ToInt32(reader["leverancier_id"]),
+                    Manufacturer = reader["leverancier"].ToString()!,
                     huidige_voorraad = Convert.ToInt32(reader["huidige_voorraad"]),
                     minimum_voorraad = Convert.ToInt32(reader["minimum_voorraad"]),
                     status = reader["status"].ToString()
@@ -63,7 +67,8 @@ namespace DataAccessLayer.DAL
                 SELECT
                     p.product_id,
                     p.ean,
-                    p.leverancier_id,
+                    l.leverancier_id  AS leverancier_id,
+                    l.naam AS leverancier,
                     p.locatie_id,
                     p.naam,
                     p.beschrijving,
@@ -73,11 +78,18 @@ namespace DataAccessLayer.DAL
                     p.huidige_voorraad,
                     p.minimum_voorraad,
                     p.status,
-                    pa.pad_locatie
+                    pa.pad_locatie,
+                    s.naam AS specificatie
                 FROM Product p
-                LEFT JOIN ProductAfbeelding pa
+                JOIN ProductAfbeelding pa
                     ON p.product_id = pa.product_id
                     AND pa.volgorde = 1
+                JOIN Leverancier l
+                    ON p.leverancier_id = l.leverancier_id
+                JOIN ProductSpecificatie ps
+                    ON p.product_id = ps.product_id
+                JOIN Specificatie s
+                    ON ps.specificatie_id = s.specificatie_id
                 WHERE p.ean = @EAN";
 
             SqlCommand cmd = new(query, conn);
@@ -99,10 +111,12 @@ namespace DataAccessLayer.DAL
                     ProductWeightKg = Convert.ToDecimal(reader["gewicht"]),
                     ProductWarranty = reader["garantie"].ToString()!,
                     ManufacturerId = Convert.ToInt32(reader["leverancier_id"]),
+                    Manufacturer = reader["leverancier"].ToString()!,
                     huidige_voorraad = Convert.ToInt32(reader["huidige_voorraad"]),
                     minimum_voorraad = Convert.ToInt32(reader["minimum_voorraad"]),
                     status = reader["status"].ToString(),
-                    ImageUrl = reader["pad_locatie"] == DBNull.Value ? null : reader["pad_locatie"].ToString()
+                    ImageUrl = reader["pad_locatie"] == DBNull.Value ? null : reader["pad_locatie"].ToString(),
+                    Specification = reader["specificatie"].ToString()!
                 };
             }
 

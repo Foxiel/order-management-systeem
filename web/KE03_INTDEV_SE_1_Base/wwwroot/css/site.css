@@ -1677,6 +1677,16 @@ f {
     font-weight: 700;
 }
 
+    .product-page .qty-input::-webkit-outer-spin-button,
+    .product-page .qty-input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .product-page .qty-input {
+        -moz-appearance: textfield;
+    }
+
     .product-page .qty-input:focus {
         outline: none;
         border-color: #00ff66;
