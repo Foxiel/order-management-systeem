@@ -93,6 +93,11 @@ window.addEventListener("storage", (e) => {
 
 window.addEventListener("cartItemsChanged", updateCartBadge);
 
-function onRetourClick() {
-    alert("Deze functie is nog niet geïmplementeerd.")
+const searchForm = document.querySelector(".search-form");
+
+if (searchForm) {
+    searchForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        alert("Deze zoekfunctie is nog onder constructie. Navigeer naar producten via de navigatiebalk om vervolgens daar te filteren.");
+    });
 }
